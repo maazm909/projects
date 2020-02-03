@@ -1,9 +1,12 @@
+#This game consists of a player starting in the center trying to get to a red gate before slimes touch and catch him or her.
+#The player is moved with the arrow keys, make sure to get both feet on the red gate!
+#Caution: The moment the program is initiated, the game starts immediately, so be ready.
 
 from tkinter import *
 import tkinter as tk
 import random
 import sys
-# global constants to set the size of the screen - feel free to update!
+# global constants to set the size of the screen
 SCREEN_WIDTH = 480
 SCREEN_HEIGHT = 480
 
@@ -11,7 +14,7 @@ class Player:
     def __init__(self,x_pos,y_pos):
         # character images from: https://lionheart963.itch.io/4-directional-character
 
-        # create lists of PhotoImages for each animation
+
         self.idle_photos = []
         for i in range(4): # 4 idle sprites
             self.idle_photos += [tk.PhotoImage(file="sprites/main_character/idle/"+str(i)+".gif")] # load each sprite and save in a list
@@ -20,8 +23,7 @@ class Player:
         for i in range(5): # 5 moving up sprites
             self.move_up_photos += [tk.PhotoImage(file="sprites/main_character/move_up/"+str(i)+".gif")]
 
-        ### TODO WARMUP 2 step 1: load photos for moving other directions
-        # Note: up and down have 5 sprites, left and right have 6! Look into the sprites folder if you want to check.
+ck.
         self.move_down_photos = []
         for i in range(5):
             self.move_down_photos += [tk.PhotoImage(file="sprites/main_character/move_down/"+str(i)+".gif")]
@@ -42,21 +44,21 @@ class Player:
             "move down": self.move_down_photos,
             "move right": self.move_right_photos,
             "move left": self.move_left_photos,
-        } ### TODO WARMUP 2 step 2: add photos for other actions
+        }
 
 
-        # keep track of current and previous action state!
+        # keep track of current and previous action state
         self.action_state = "idle"
         self.last_state   = "idle"
 
         self.current_photo = 0 # start at the first photo
 
-        # bind up and release keys - 'w' also works if you want to use 'wasd' controls
+        # bind up and release keys
         win.bind('<Up>',self.move_up)
         win.bind('<Down>', self.move_down)
         win.bind('<Right>', self.move_right)
         win.bind('<Left>', self.move_left)
-        ### TODO WARMUP 2 step 4 (make the functions first, so you have something to bind to!): bind other keys
+        ##
 
         win.bind('<KeyRelease>',self.release) # checking for any key release, not quite right but will work for us
 
@@ -74,9 +76,9 @@ class Player:
             if self.get_feet_coords()[1] <= 20:
                 canvas.move(self.imageID,0,0)
             else:
-                canvas.move(self.imageID,0,-10) # Tkinter's top left is (0,0) and down is positive, so moving up means going negative in the y direction
+                canvas.move(self.imageID,0,-10)
 
-        ### TODO WARMUP 2 step 5: move for other actions states
+
         elif self.action_state == 'move down':
             if self.get_feet_coords()[1] >= SCREEN_HEIGHT:
                 canvas.move(self.imageID,0,0)
@@ -97,7 +99,7 @@ class Player:
                 canvas.move(self.imageID, -10, 0)
 
         # rotates through photos to animate, resets animation on state change
-        if self.action_state != self.last_state: # don't reset photos unless changing state
+        if self.action_state != self.last_state:
             self.last_state = self.action_state
             self.current_photo = 0 # go back to beginning of animation
 
@@ -110,7 +112,6 @@ class Player:
     def move_up(self,event):
         self.action_state = "move up"
 
-    ### TODO WARMUP 2 step 3: create functions for the other movements
     def move_down(self, event):
         self.action_state = "move down"
 
@@ -125,7 +126,7 @@ class Player:
     def release(self, event):
         self.action_state = "idle"
 
-    # returns the x,y of the center of the feet as a list - not being used yet!
+    # returns the x,y of the center of the feet as a list
     def get_feet_coords(self):
         points = canvas.coords(self.imageID) # gets x and y position of the center of the image
         feet_x = points[0]
@@ -231,7 +232,6 @@ class Game:
         self.gate_loc_x = canvas.coords(self.room.arch_id)[0]
         self.gate_loc_y = canvas.coords(self.room.arch_id)[1]
         if self.player.is_in(self.gate_loc_x, self.gate_loc_y):
-            after_cancel(self.abc)
             self.game_win()
             return
 
@@ -257,8 +257,7 @@ class Game:
         canvas.delete('all')
         canvas.create_text(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, text='Welp, you were caught by the slimes')
 
-# Normally we say not to use global variables, but graphics programming often uses them
-# to keep track of various states and information more easily. They are okay here.
+
 win = tk.Tk()
 win.minsize(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 win.maxsize(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
@@ -267,6 +266,6 @@ win.title("My awesome game!")
 canvas = tk.Canvas(win, width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 canvas.pack()
 
-g = Game() # need to save to a vaiable, otherwise images sometimes vanish
+g = Game()
 
 tk.mainloop()
