@@ -1,3 +1,8 @@
+#In this game, a random number is chosen by the CPU between 1 and 99.
+#You have to try to guess the number in the least amount of guesses as you can.
+#Every time you guess, the game will tell you if you need to guess higher or lower.
+
+
 import random
 import tkinter as tk
 
@@ -11,7 +16,7 @@ class numberguess(tk.Frame):
         self.maxRange = 100
         tk.Frame.__init__(self, master)
         master.minsize(width = 275, height=200)
-        master.maxsize(width = 275, height=200)
+        master.maxsize(width = 475, height=400)
         master.title('Guess the number!')
         self.pack()
         self.createWidgets()
@@ -19,12 +24,12 @@ class numberguess(tk.Frame):
     # creates different text and parts of the GUI
     def createWidgets(self):
         # shows amount of guesses
-        self.turnLabel = tk.Label(self, bg='grey')
+        self.turnLabel = tk.Label(self, bg='white')
         self.turnLabel['text'] = 'Number of guesses: ' + str(self.turns)
         self.turnLabel.pack(padx=5, pady=10)
 
         # presents whether the guess given is high or low relative to target
-        self.locationLabel = tk.Label(self, bg='grey')
+        self.locationLabel = tk.Label(self, bg='white')
         self.locationLabel['text'] = 'Welcome to Guess a Number! Please enter \n your guess between 1 and 99 below'
         self.locationLabel.pack(padx=5, pady=5)
 
