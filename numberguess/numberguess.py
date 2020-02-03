@@ -79,7 +79,7 @@ class numberguess(tk.Frame):
         self.rangeLabel.pack_forget()
         self.entryBox.pack_forget()
         self.submitButton.pack_forget()
-        self.finalMessage = tk.Label(self, bg='green')
+        self.finalMessage = tk.Label(self, bg='white')
         self.finalMessage['text'] = 'Congratulations! It took you ' + str(self.turns) + ' guesses to get ' + str(self.target)
         self.finalMessage.pack(pady=10)
 
