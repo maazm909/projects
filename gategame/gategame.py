@@ -22,8 +22,7 @@ class Player:
         self.move_up_photos = []
         for i in range(5): # 5 moving up sprites
             self.move_up_photos += [tk.PhotoImage(file="sprites/main_character/move_up/"+str(i)+".gif")]
-
-ck.
+            
         self.move_down_photos = []
         for i in range(5):
             self.move_down_photos += [tk.PhotoImage(file="sprites/main_character/move_down/"+str(i)+".gif")]
