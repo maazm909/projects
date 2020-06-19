@@ -33,7 +33,28 @@ class Playlistcreator:
 
 
     def get_liked_videos(self):
-        pass
+        request = self.youtube_client.videos().list(
+            part = "snippet,contentDetails, statistics",
+            myRating="like"
+        )
+        response = request.exexute()
+
+        for item in response["items"]:
+            video_title = item["snippet"]["title"]
+            youtube_url = "https:www.youtube.com/watch?v={}".format(item["id"])
+
+            video = youtube_dl.YoutubeDL({}).extract_info(youtube_url, download=False)
+            song_name = video["track"]
+            artist = video["artist"]
+
+            self.all_song_info[video_title]=
+            {
+                "youtube_url":youtube_url,
+                "song_name": song_name,
+                "artist": artist,
+
+                "spotify_uri":self.get_spotify_uri(song_name,artist)
+            }
 
     def create_playlist(self):
         request_body = json.dumps
