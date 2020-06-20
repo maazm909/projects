@@ -71,7 +71,7 @@ class Playlistcreator:
             data=request_body,
             headers={
                 "Content-Type":"application/json",
-                "Authorization":"Bearer {}".format(spotify_token)
+                "Authorization":"Bearer {}".format(self.spotify_token)
             }
         )
 
@@ -99,4 +99,25 @@ class Playlistcreator:
         return uri
 
     def add_song_to_playlist(self):
-        pass
+        self.get_liked_videos()
+
+        uri = []
+        for song, info in self.all_song_info.items():
+            uris.append(info["spotify uri"])
+
+        playlist_id = self.create_playlist()
+
+        request_data = json.dumps()
+
+        query = "https://api.spotify.com/v1/playlists/{}/tracks".format(playlist_id)
+
+        response = requests.post(
+            query,
+            data = request_data,
+            headers={
+                "Content-Type":"application/json",
+                "Authorization": "Bearer {}".format(self.spotify_token)
+            }
+        )
+        response_json = response.json()
+        return response_json
