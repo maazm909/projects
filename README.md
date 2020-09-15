@@ -1,1 +1,1 @@
-Welcome to Maaz Mohammad's Project Repo! Always WIP.
+Welcome to Maaz Mohammad's Personal Project Repo! Always WIP.
