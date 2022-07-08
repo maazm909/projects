@@ -1,0 +1,14 @@
+{
+  "name": "ticketscanner",
+  "version": "1.0.0",
+  "description": "Convention ticket app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Maaz Mohammad",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^19.0.7"
+  }
+}
