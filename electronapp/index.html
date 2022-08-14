@@ -5,6 +5,7 @@
     <title>Sys</title>
     <link rel="stylesheet" type="text/css" href="./css/master.css" />
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/cerulean/bootstrap.min.css" />
+    <script defer src="renderer.js"></script>
   </head>
   <body>
     <h1>My App</h1>
@@ -13,9 +14,10 @@
         <label for="ticketNum">Ticket Number</label>
         <input type="text" class="form-control" id="ticketNum">
       </div>
+      <div id="ticketDisplay">
+        <table class="table" id="ticketTable">
+        </table>
+      </div>
     </form>
   </body>
-  <script>
-    require('./renderer.js');
-  </script>
 </html>

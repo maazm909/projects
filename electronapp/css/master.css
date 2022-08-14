@@ -1,3 +1,11 @@
 html {
   padding: 20px;
 }
+
+#ticketTable {
+  border: 1px solid;
+}
+
+#ticketDisplay {
+  margin-top: 10px;
+}
