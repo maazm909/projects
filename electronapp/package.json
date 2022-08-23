@@ -9,6 +9,7 @@
   "author": "Maaz Mohammad",
   "license": "ISC",
   "dependencies": {
-    "electron": "^19.0.7"
+    "electron": "^19.0.7",
+    "exceljs": "^4.3.0"
   }
 }
