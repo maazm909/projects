@@ -2,9 +2,11 @@ const ExcelJS  = require('exceljs');
 
 document.getElementById('ticketNum').addEventListener("input", addTicket);
 
-document.getElementById('submitbtn').addEventListener("click", processTickets);
+document.getElementById('submitbtn').addEventListener("click", determineSellers);
 
-document.getElementById('submitbtn').addEventListener("click", loadRanges);
+// document.getElementById('submitbtn').addEventListener("click", loadRanges);
+
+window.addEventListener("load", loadRanges);
 
 let currentTickets = [];
 
@@ -31,6 +33,7 @@ async function loadRanges() {
       ranges = Object.assign({[fullname]:{'starts':startspl, 'ends':endsspl}}, ranges);
     }
   });
+  console.log(ranges);
 }
 
 //adds ticket to list and to visual table
@@ -72,11 +75,30 @@ function updateVisualList() {
   }
 }
 
-//takes whatever is in ticket list and adds it to spreadsheet
-async function processTickets() {
+//looks at current ticket list and determines seller of each one, then passes on to process ticket
+async function determineSellers() {
+  //loop through each current ticket
+  currentTickets.forEach(num => {
+    //get name and ranges for each name
+    for (let [key, val] of Object.entries(ranges)) {
+      for (var i = 0; i < val.starts.length; i++) {
+        //if number is in range, pass it on to process ticket
+        num = Number(num);
+        if (num > val.starts[i] && num < val.ends[i]) {
+          processTicket(key, num);
+        }
+      }
+    }  
+  });  
+}
+
+//takes ticket and name and add it and options to spreadsheet
+async function processTicket(name, num) {
   var workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile("data/testdata.xlsx");
+  await workbook.xlsx.readFile("data/output.xlsx");
+  //check if sheet for name exists
+  const data = workbook.getWorksheet(name);
   var worksheet = workbook.worksheets[0];
   worksheet.addRow([1, 'maaz', 'jeff']);
-  await workbook.xlsx.writeFile('data/testdata.xlsx');
+  await workbook.xlsx.writeFile('data/output.xlsx');
 }
