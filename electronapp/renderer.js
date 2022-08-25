@@ -96,9 +96,23 @@ async function determineSellers() {
 async function processTicket(name, num) {
   var workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile("data/output.xlsx");
-  //check if sheet for name exists
-  const data = workbook.getWorksheet(name);
-  var worksheet = workbook.worksheets[0];
-  worksheet.addRow([1, 'maaz', 'jeff']);
+  //TODO: Create object to add to spreadsheet
+  var info = {};
+  info = {name: name, ticketnum: num, price: 10, alreadypaid: 'yes'}
+  //check if sheet for name exists 
+  var sheet = workbook.getWorksheet(name);
+  //create new sheet if name not already in sheet
+  if (sheet == null) { 
+    sheet = workbook.addWorksheet(name);
+    sheet.columns = [
+      { header: 'Name', key: 'name', width: 30 },
+      { header: 'Ticket Number', key: 'ticketnum', width: 30 },
+      { header: 'Price', key: 'price', width: 30 },
+      { header: 'Already Paid', key: 'alreadypaid', width: 30}
+    ];
+  }
+  sheet.addRow(info);
+  // var worksheet = workbook.worksheets[0];
+  // worksheet.addRow([1, 'maaz', 'jeff']);
   await workbook.xlsx.writeFile('data/output.xlsx');
 }
