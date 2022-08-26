@@ -9,7 +9,11 @@
   "author": "Maaz Mohammad",
   "license": "ISC",
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.0",
     "electron": "^19.0.7",
-    "exceljs": "^4.3.0"
+    "exceljs": "^4.3.0",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1"
   }
 }

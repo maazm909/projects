@@ -8,6 +8,26 @@ document.getElementById('submitbtn').addEventListener("click", determineSellers)
 
 window.addEventListener("load", loadRanges);
 
+//radio button listeners for keys pressed
+window.addEventListener("keypress", function(e) {
+  if (e.key === "a") {
+    document.getElementById('$25').checked = true;
+  }
+  else if (e.key === "s") {
+    document.getElementById('$20').checked = true;
+  }
+  else if (e.key === "d") {
+    document.getElementById('$other').checked = true;
+    //TODO: handler function to manage opening option
+  }
+  else if (e.key === "o") {
+    document.getElementById('yespaid').checked = true;
+  }
+  else if (e.key === "p") {
+    document.getElementById('nopaid').checked = true;
+  }
+});
+
 let currentTickets = [];
 
 let ranges = {};
@@ -39,10 +59,13 @@ async function loadRanges() {
 //adds ticket to list and to visual table
 function addTicket() {
   console.log("entered addticket");
-  let number = document.getElementById('ticketNum').value;
+  let numberbox = document.getElementById('ticketNum');
+  let number = numberbox.value;
   if (number.toString().length == 6) {
     //append ticket to list
     currentTickets.push(number);
+    //clear ticket number box
+    numberbox.value = '';
     //add it visually to page
     updateVisualList();
     console.log(number);
@@ -62,17 +85,19 @@ function updateVisualList() {
   let table = document.querySelector("#ticketTable");
   //clear table
   table.innerHTML = "";
+  let row = document.createElement("tr");
   console.log(currentTickets);
   for (const num of currentTickets) {
     //create tr 
-    let row = document.createElement("tr");
+    // let row = document.createElement("tr");
     //create td
     let cell = document.createElement("td");
+    cell.classList.add("ticketCells");
     cell.innerText = num;
     cell.addEventListener("click", removeTicket);
     row.appendChild(cell);
-    table.appendChild(row);
   }
+  table.appendChild(row);
 }
 
 //looks at current ticket list and determines seller of each one, then passes on to process ticket
