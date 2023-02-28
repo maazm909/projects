@@ -20,13 +20,19 @@ window.addEventListener("keypress", function(e) {
     document.getElementById('$other').checked = true;
     //TODO: handler function to manage opening option
   }
-  else if (e.key === "o") {
+  else if (e.key === "y") {
     document.getElementById('yespaid').checked = true;
   }
-  else if (e.key === "p") {
+  else if (e.key === "n") {
     document.getElementById('nopaid').checked = true;
   }
 });
+
+//add listeners to toggle otherprice box when other is selected
+document.querySelectorAll('input[type=radio][name=priceselect]').forEach(e => e.addEventListener('change', toggleOtherPrice));
+
+//add listener to change value of other radio button when other input box is changed
+document.querySelector('#customprice').addEventListener('input', updateOtherValue);
 
 let currentTickets = [];
 
@@ -125,6 +131,7 @@ async function determineSellers() {
 async function processTicket(name, num) {
   var workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile("data/output.xlsx");
+  let alreadywritten = false;
   //TODO: Create object to add to spreadsheet
   var info = {};
   let amount = document.querySelector('input[type=radio][name=priceselect]:checked').value;
@@ -136,14 +143,50 @@ async function processTicket(name, num) {
   if (sheet == null) { 
     sheet = workbook.addWorksheet(name);
   }
+  //sheet keys ARE NOT PERSISTED
   sheet.columns = [
     { header: 'Name', key: 'name', width: 30 },
     { header: 'Ticket Number', key: 'ticketnum', width: 30 },
     { header: 'Price', key: 'price', width: 30 },
     { header: 'Already Paid', key: 'alreadypaid', width: 30}
   ];
+  //check if ticket num is already in sheet
+  sheet.eachRow(async function(row, rowNumber) {
+    let location = "B" + rowNumber.toString();
+    let pulled = sheet.getCell(location);
+    //if num is in sheet
+    if (Number(pulled.text) == num) {
+      //replace content
+      sheet.spliceRows(rowNumber, 1, info);
+      await workbook.xlsx.writeFile('data/output.xlsx');
+      alreadywritten = true;
+      //TODO: add replaced status message
+    }
+  });
+  if (alreadywritten) {
+    return;
+  }
+  //if ticket num not already in sheet, append row
   sheet.addRow(info);
   // var worksheet = workbook.worksheets[0];
   // worksheet.addRow([1, 'maaz', 'jeff']);
   await workbook.xlsx.writeFile('data/output.xlsx');
+}
+
+//hides or shows other price input box
+function toggleOtherPrice() {
+  let other = document.getElementById('$other');
+  if (other.checked) {
+    document.getElementById('customprice').style.display = 'inline-block';
+  }
+  else {
+    document.getElementById('customprice').style.display = 'none';
+  }
+
+}
+
+//update value of other radio button when other box is changed
+function updateOtherValue() {
+  let val = document.getElementById('customprice').value;
+  document.getElementById('$other').value = val;
 }

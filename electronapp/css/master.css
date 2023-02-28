@@ -21,3 +21,7 @@ html {
 #paidselect {
   margin-top: 10px;
 }
+
+#customprice {
+  display: none;
+}
