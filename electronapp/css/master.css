@@ -1,0 +1,27 @@
+html {
+  padding: 20px;
+}
+
+#ticketTable, .ticketCells {
+  border: 1px solid;
+}
+
+.ticketCells {
+  text-align: center;
+}
+
+#ticketDisplay {
+  margin-top: 10px;
+}
+
+#priceselect {
+  margin-top: 10px;
+}
+
+#paidselect {
+  margin-top: 10px;
+}
+
+#customprice {
+  display: none;
+}
