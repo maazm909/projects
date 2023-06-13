@@ -3,6 +3,7 @@ const { dirname } = require('path');
 const path = require('path');
 const url = require('url');
 
+if (require('electron-squirrel-startup')) app.quit();
 let win;
 
 function createWindow() {
@@ -11,6 +12,7 @@ function createWindow() {
     height:600,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
       contextIsolation: false
     }
   });

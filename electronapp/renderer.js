@@ -34,9 +34,26 @@ document.querySelectorAll('input[type=radio][name=priceselect]').forEach(e => e.
 //add listener to change value of other radio button when other input box is changed
 document.querySelector('#customprice').addEventListener('input', updateOtherValue);
 
+// document.getElementById("loadrangesbtn").addEventListener('click', function(e) {
+//   dialog.showOpenDialog({
+//     properties: ['openFile']
+//   }, function (files) {
+//     if (files !== undefined) {
+//       console.log("failed to load ranges");
+//     }
+//     else {
+//       rangesfile = files;
+//     }
+//   });
+// });
+
 let currentTickets = [];
 
 let ranges = {};
+
+let rangesfile = "";
+
+let outputfile = "";
 
 //function to load ticket ranges of sellers
 async function loadRanges() {
