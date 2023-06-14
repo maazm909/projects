@@ -1,4 +1,5 @@
 const ExcelJS  = require('exceljs');
+const { dialog } = require('@electron/remote');
 
 document.getElementById('ticketNum').addEventListener("input", addTicket);
 
@@ -6,7 +7,7 @@ document.getElementById('submitbtn').addEventListener("click", determineSellers)
 
 // document.getElementById('submitbtn').addEventListener("click", loadRanges);
 
-window.addEventListener("load", loadRanges);
+// window.addEventListener("load", loadRanges);
 
 //radio button listeners for keys pressed
 window.addEventListener("keypress", function(e) {
@@ -34,18 +35,31 @@ document.querySelectorAll('input[type=radio][name=priceselect]').forEach(e => e.
 //add listener to change value of other radio button when other input box is changed
 document.querySelector('#customprice').addEventListener('input', updateOtherValue);
 
-// document.getElementById("loadrangesbtn").addEventListener('click', function(e) {
-//   dialog.showOpenDialog({
-//     properties: ['openFile']
-//   }, function (files) {
-//     if (files !== undefined) {
-//       console.log("failed to load ranges");
-//     }
-//     else {
-//       rangesfile = files;
-//     }
-//   });
-// });
+document.getElementById("loadrangesbtn").addEventListener('click', function(e) {
+  dialog.showOpenDialog({
+    properties: ['openFile']
+  }).then(result => {
+    console.log(result.filePaths[0]);
+    document.getElementById("rangespath").innerText = result.filePaths[0];
+    rangesfile = result.filePaths[0];
+  }).catch(err => {
+    console.log("failed range load");
+  });
+      
+});
+
+document.getElementById("outputfilebtn").addEventListener('click', function(e) {
+  dialog.showOpenDialog({
+    properties: ['openFile']
+  }).then(result => {
+    console.log(result.filePaths[0]);
+    document.getElementById("outputpath").innerText = result.filePaths[0];
+    outputfile = result.filePaths[0];
+    loadRanges();
+  }).catch(err => {
+    console.log("failed output file load");
+  });
+});
 
 let currentTickets = [];
 
@@ -58,7 +72,7 @@ let outputfile = "";
 //function to load ticket ranges of sellers
 async function loadRanges() {
   var workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile("data/ranges.xlsx");
+  await workbook.xlsx.readFile(rangesfile);
   const sheet = workbook.worksheets[0];
   sheet.eachRow(function(row, rowNumber) {
     if (rowNumber != 1) { //need to skip first row, headers
@@ -147,7 +161,7 @@ async function determineSellers() {
 //takes ticket and name and add it and options to spreadsheet
 async function processTicket(name, num) {
   var workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.readFile("data/output.xlsx");
+  await workbook.xlsx.readFile(outputfile);
   let alreadywritten = false;
   //TODO: Create object to add to spreadsheet
   var info = {};
@@ -175,8 +189,8 @@ async function processTicket(name, num) {
     if (Number(pulled.text) == num) {
       //replace content
       sheet.spliceRows(rowNumber, 1, info);
-      await workbook.xlsx.writeFile('data/output.xlsx');
       alreadywritten = true;
+      await workbook.xlsx.writeFile(outputfile);
       //TODO: add replaced status message
     }
   });
@@ -187,7 +201,7 @@ async function processTicket(name, num) {
   sheet.addRow(info);
   // var worksheet = workbook.worksheets[0];
   // worksheet.addRow([1, 'maaz', 'jeff']);
-  await workbook.xlsx.writeFile('data/output.xlsx');
+  await workbook.xlsx.writeFile(outputfile);
 }
 
 //hides or shows other price input box
