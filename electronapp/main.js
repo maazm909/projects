@@ -2,7 +2,7 @@ const {app, BrowserWindow} = require('electron');
 const { dirname } = require('path');
 const path = require('path');
 const url = require('url');
-
+require('@electron/remote/main').initialize();
 if (require('electron-squirrel-startup')) app.quit();
 let win;
 
@@ -12,10 +12,13 @@ function createWindow() {
     height:600,
     webPreferences: {
       nodeIntegration: true,
-      enableRemoteModule: true,
-      contextIsolation: false
+      nodeIntegrationInSubFrames: true,
+      nodeIntegrationInWorker: true,
+      contextIsolation: false,
     }
   });
+  require("@electron/remote/main").enable(win.webContents);
+
 
   win.loadFile(path.join(__dirname, 'index.html'));
 
