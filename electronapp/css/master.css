@@ -20,6 +20,21 @@ html {
 
 #paidselect {
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#submitbtn {
+  background-image: none;
+  background-color: pink;
+  color: black;
+}
+
+#yespaid:checked + label{
+  background-color: green;
+}
+
+#nopaid:checked + label {
+  background-color: red;
 }
 
 #customprice {
