@@ -13,22 +13,19 @@
       <p id="rangespath"></p>
     </div>
     <div>
-      <button class="btn btn-primary" id="outputfilebtn">Choose Output File</button>
+      <button class="btn btn-primary" id="outputfilebtn" disabled>Choose Output File</button>
       <p id="outputpath"></p>
     </div>
     <h1>My App</h1>
     <form class="" action="index.html" method="post">
       <div class="form-group">
         <label for="ticketNum">Ticket Number</label>
-        <input type="number" class="form-control" id="ticketNum">
+        <input type="number" class="form-control" id="ticketNum" disabled>
       </div>
     </form>
     <div id="ticketDisplay">
       <table class="table" id="ticketTable">
       </table>
-    </div>
-    <div>
-      <button type="button" class="btn btn-primary" id="submitbtn">Submit All Tickets</button>
     </div>
     <div>
       <div class="btn-group" id="priceselect" role="group" aria-label="Basic radio toggle button group">
@@ -50,6 +47,9 @@
     
       <input type="radio" class="btn-check" name="paidselect" id="nopaid" value="no" autocomplete="off">
       <label class="btn btn-outline-primary" for="nopaid">No (N)</label>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary" id="submitbtn">Submit All Tickets</button>
     </div>
     <div id="alerts">
     </div>
