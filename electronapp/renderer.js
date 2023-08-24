@@ -5,10 +5,7 @@ document.getElementById('ticketNum').addEventListener("input", addTicket);
 
 document.getElementById('submitbtn').addEventListener("click", determineSellers);
 
-// document.getElementById('submitbtn').addEventListener("click", loadRanges);
-
-// window.addEventListener("load", loadRanges);
-
+const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 //radio button listeners for keys pressed
 window.addEventListener("keypress", function(e) {
   if (e.key === "a") {
@@ -27,6 +24,9 @@ window.addEventListener("keypress", function(e) {
   else if (e.key === "n") {
     document.getElementById('nopaid').checked = true;
   }
+  else if (e.key in numbers) {
+    document.getElementById('ticketNum').focus();
+  }
 });
 
 //add listeners to toggle otherprice box when other is selected
@@ -34,6 +34,12 @@ document.querySelectorAll('input[type=radio][name=priceselect]').forEach(e => e.
 
 //add listener to change value of other radio button when other input box is changed
 document.querySelector('#customprice').addEventListener('input', updateOtherValue);
+
+//only allow outfilebtn to be clicked if ranges file button has been clicked
+document.getElementById('loadrangesbtn').addEventListener('click', e => document.getElementById('outputfilebtn').removeAttribute('disabled'));
+
+//only allow ticket num to be entered if output file button has been clicked
+document.getElementById('outputfilebtn').addEventListener('click', e => document.getElementById('ticketNum').removeAttribute('disabled'));
 
 document.getElementById("loadrangesbtn").addEventListener('click', function(e) {
   dialog.showOpenDialog({
@@ -140,18 +146,19 @@ function updateVisualList() {
 //looks at current ticket list and determines seller of each one, then passes on to process ticket
 async function determineSellers() {
   //loop through each current ticket
-  currentTickets.forEach(num => {
+  for (var j = 0; j < currentTickets.length; j++) {
+    var num = currentTickets[j];
     //get name and ranges for each name
     for (let [key, val] of Object.entries(ranges)) {
       for (var i = 0; i < val.starts.length; i++) {
         //if number is in range, pass it on to process ticket
         num = Number(num);
-        if (num > val.starts[i] && num < val.ends[i]) {
-          processTicket(key, num);
+        if (num >= val.starts[i] && num <= val.ends[i]) {
+          await processTicket(key, num);
         }
       }
-    }  
-  });
+    }
+  }  
   //clear current tickets since all were processed
   currentTickets = [];
   //update visually
