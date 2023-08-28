@@ -9,18 +9,23 @@
   </head>
   <body>
     <div>
-      <button class="btn btn-primary" id="loadrangesbtn">Load Ranges</button>
+      <p>Click top two buttons to load the ranges file and the output file that you were given.</p>
+      <p>You can either scan the ticket or manually type in the ticket number.</p>
+      <p>You can load multiple tickets, then specify price and paid, and submit all at once.</p>
+    </div>
+    <div>
+      <button class="btn btn-primary btn-lg" id="loadrangesbtn">Load Ranges</button>
       <p id="rangespath"></p>
     </div>
     <div>
-      <button class="btn btn-primary" id="outputfilebtn" disabled>Choose Output File</button>
+      <button class="btn btn-primary btn-lg" id="outputfilebtn" disabled>Choose Output File</button>
       <p id="outputpath"></p>
     </div>
-    <h1>My App</h1>
+    <h1>Minnesota Muslim Convention Ticket App</h1>
     <form class="" action="index.html" method="post">
       <div class="form-group">
         <label for="ticketNum">Ticket Number</label>
-        <input type="number" class="form-control" id="ticketNum" disabled>
+        <input type="number" class="form-control form-control-lg" id="ticketNum" disabled>
       </div>
     </form>
     <div id="ticketDisplay">
@@ -28,7 +33,7 @@
       </table>
     </div>
     <div>
-      <div class="btn-group" id="priceselect" role="group" aria-label="Basic radio toggle button group">
+      <div class="btn-group btn-group-lg" id="priceselect" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check" name="priceselect" id="$25" value="25" autocomplete="off" checked>
         <label class="btn btn-outline-primary" for="$25">$25 (A)</label>
       
@@ -41,7 +46,7 @@
       </div>
     </div>
     PAID?
-    <div class="btn-group" id="paidselect" role="group" aria-label="Basic radio toggle button group">
+    <div class="btn-group btn-group-lg" id="paidselect" role="group" aria-label="Basic radio toggle button group">
       <input type="radio" class="btn-check" name="paidselect" id="yespaid" value="yes" autocomplete="off" checked>
       <label class="btn btn-outline-primary" for="yespaid">Yes (Y)</label>
     
@@ -49,7 +54,7 @@
       <label class="btn btn-outline-primary" for="nopaid">No (N)</label>
     </div>
     <div>
-      <button type="button" class="btn btn-primary" id="submitbtn">Submit All Tickets</button>
+      <button type="button" class="btn btn-primary btn-lg" id="submitbtn" disabled>Submit All Tickets</button>
     </div>
     <div id="alerts">
     </div>
