@@ -1,23 +1,23 @@
+/* eslint-disable require-jsdoc */
 const {app, BrowserWindow} = require('electron');
-const { dirname } = require('path');
+// const { dirname } = require('path');
 const path = require('path');
-const url = require('url');
+// const url = require('url');
 require('@electron/remote/main').initialize();
 if (require('electron-squirrel-startup')) app.quit();
-let win;
 
 function createWindow() {
   const win = new BrowserWindow({
-    width:800, 
-    height:600,
+    width: 800,
+    height: 600,
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInSubFrames: true,
       nodeIntegrationInWorker: true,
       contextIsolation: false,
-    }
+    },
   });
-  require("@electron/remote/main").enable(win.webContents);
+  require('@electron/remote/main').enable(win.webContents);
 
 
   win.loadFile(path.join(__dirname, 'index.html'));
@@ -35,7 +35,7 @@ function createWindow() {
   });
 }
 
-//run create createWindow
+// run create createWindow
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
