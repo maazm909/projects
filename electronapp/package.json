@@ -1,6 +1,6 @@
 {
   "name": "ticketscanner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convention ticket app",
   "main": "main.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "author": "Maaz Mohammad",
   "license": "ISC",
   "dependencies": {
+    "@electron-forge/maker-dmg": "^6.4.1",
     "@electron/remote": "^2.0.10",
     "electron-squirrel-startup": "^1.0.0",
     "exceljs": "^4.3.0"
