@@ -7,6 +7,9 @@ document.getElementById('ticketNum').addEventListener('input', addTicket);
 document.getElementById('submitbtn')
     .addEventListener('click', determineSellers);
 
+document.getElementById('ticket-form')
+    .addEventListener('submit', (e) => e.preventDefault());
+
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 // radio button listeners for keys pressed
 window.addEventListener('keypress', function(e) {
@@ -23,6 +26,8 @@ window.addEventListener('keypress', function(e) {
     document.getElementById('nopaid').checked = true;
   } else if (e.key in numbers) {
     document.getElementById('ticketNum').focus();
+  } else if (e.key === 'Enter') {
+    determineSellers();
   }
 });
 
@@ -152,8 +157,10 @@ function updateVisualList() {
 // determines seller of each one
 // passes on to process ticket
 async function determineSellers() {
+  let numValid = false;
   // loop through each current ticket
   for (let j = 0; j < currentTickets.length; j++) {
+    numValid = false;
     let num = currentTickets[j];
     // get name and ranges for each name
     for (const [key, val] of Object.entries(ranges)) {
@@ -161,13 +168,16 @@ async function determineSellers() {
         // if number is in range, pass it on to process ticket
         num = Number(num);
         if (num >= val.starts[i] && num <= val.ends[i]) {
+          numValid = true;
           await processTicket(key, num);
         }
       }
     }
     // if number does not match any seller
     // alert here that the number is invalid
-    createInvalidAlert(100);
+    if (numValid == false) {
+      createInvalidAlert(num);
+    }
   }
   // clear current tickets since all were processed
   currentTickets = [];

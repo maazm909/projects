@@ -22,7 +22,7 @@
       <p id="outputpath"></p>
     </div>
     <h1>Minnesota Muslim Convention Ticket App</h1>
-    <form class="" action="index.html" method="post">
+    <form class="" action="index.html" id="ticket-form" method="post">
       <div class="form-group">
         <label for="ticketNum">Ticket Number</label>
         <input type="number" class="form-control form-control-lg" id="ticketNum" disabled>
@@ -31,6 +31,14 @@
     <div id="ticketDisplay">
       <table class="table" id="ticketTable">
       </table>
+    </div>
+    PAID?
+    <div class="btn-group btn-group-lg" id="paidselect" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="paidselect" id="yespaid" value="yes" autocomplete="off" checked>
+      <label class="btn btn-outline-primary" for="yespaid">Yes (Y)</label>
+    
+      <input type="radio" class="btn-check" name="paidselect" id="nopaid" value="no" autocomplete="off">
+      <label class="btn btn-outline-primary" for="nopaid">No (N)</label>
     </div>
     <div>
       <div class="btn-group btn-group-lg" id="priceselect" role="group" aria-label="Basic radio toggle button group">
@@ -45,16 +53,8 @@
         <input type="number" name="customprice" id="customprice">
       </div>
     </div>
-    PAID?
-    <div class="btn-group btn-group-lg" id="paidselect" role="group" aria-label="Basic radio toggle button group">
-      <input type="radio" class="btn-check" name="paidselect" id="yespaid" value="yes" autocomplete="off" checked>
-      <label class="btn btn-outline-primary" for="yespaid">Yes (Y)</label>
-    
-      <input type="radio" class="btn-check" name="paidselect" id="nopaid" value="no" autocomplete="off">
-      <label class="btn btn-outline-primary" for="nopaid">No (N)</label>
-    </div>
     <div>
-      <button type="button" class="btn btn-primary btn-lg" id="submitbtn" disabled>Submit All Tickets</button>
+      <button type="button" class="btn btn-primary btn-lg" id="submitbtn" disabled>Submit All Tickets (Enter)</button>
     </div>
     <div id="alerts">
     </div>
