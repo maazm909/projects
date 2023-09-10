@@ -14,9 +14,9 @@ const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 // radio button listeners for keys pressed
 window.addEventListener('keypress', function(e) {
   if (e.key === 'a') {
-    document.getElementById('$25').checked = true;
-  } else if (e.key === 's') {
     document.getElementById('$20').checked = true;
+  } else if (e.key === 's') {
+    document.getElementById('$15').checked = true;
   } else if (e.key === 'd') {
     document.getElementById('$other').checked = true;
     // TODO: handler function to manage opening option
