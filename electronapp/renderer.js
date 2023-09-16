@@ -116,7 +116,7 @@ function addTicket() {
   console.log('entered addticket');
   const numberbox = document.getElementById('ticketNum');
   const number = numberbox.value;
-  if (number.toString().length == 6) {
+  if (number.toString().length == 5) {
     // append ticket to list
     currentTickets.push(number);
     // clear ticket number box
