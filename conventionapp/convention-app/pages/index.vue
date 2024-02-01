@@ -1,6 +1,16 @@
 <template>
-  <div>Home Page</div>
-  <!-- Add links for registration, quran registration, bazaar -->
+  <div>
+    Home Page
+    <RouterLink to="/registration">
+      <v-btn>Registration</v-btn>
+    </RouterLink>
+    <RouterLink to="/quranregistration">
+      <v-btn>Quran Registration</v-btn>
+    </RouterLink>
+    <RouterLink to="/bazaar">
+      <v-btn>Bazaar</v-btn>
+    </RouterLink>
+  </div>
 </template>
 
 <script lang="ts" setup></script>
