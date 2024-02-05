@@ -1,7 +1,5 @@
 <template>
-  <div class="flex-row">
-    <h1 class="">HOME PAGE</h1>
-  </div>
+  <div></div>
 </template>
 
 <script lang="ts" setup></script>
