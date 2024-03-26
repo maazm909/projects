@@ -35,3 +35,13 @@ model User {
   posts   Post[]
   profile Profile?
 }
+
+model Attendee {
+  id         Int     @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  age        Int
+  gender     String
+  quranComp  String?
+  quranLevel String?
+}
