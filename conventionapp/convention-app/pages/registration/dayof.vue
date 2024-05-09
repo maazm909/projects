@@ -18,7 +18,13 @@
         </v-form>
       </v-sheet>
     </v-row>
-    <pre>{{ example }}</pre>
+    <v-row>
+      <v-col>
+        <div class="error-container">
+          <v-alert closable>{{ updateResponse }}</v-alert>
+        </div>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -36,6 +42,7 @@ export default defineNuxtComponent({
     rowCount: 3,
     information: [] as IAttendeeDataIndex[],
     example: "",
+    updateResponse: "",
   }),
   methods: {
     updateInfo(info: IAttendeeData, row: number) {
@@ -56,8 +63,10 @@ export default defineNuxtComponent({
             });
             if (response.status === "success") {
               console.log("write successful");
+              this.updateResponse = "write successful";
             } else {
               console.error("write failed");
+              this.updateResponse = "write failed";
             }
           } catch (error) {
             console.error(error);

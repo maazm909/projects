@@ -16,3 +16,14 @@ Important Fields for registration:
 15. Address
 16. Zip
 17. TimesCheckedIn
+
+TODO
+-
+- Implement global error modal 
+- Online
+  - Add checkedIn field to Attendee model
+  - Create new table for online page that has toggle for checking in
+  - Search should check relevant fields each time text field is modified
+  - Toggle should be instant, query should be done after table modification
+- Day Of
+  - Implement rules for inputs
