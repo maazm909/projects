@@ -38,7 +38,6 @@ export default defineNuxtComponent({
   },
   data: () => ({
     info: {
-      id: -1,
       firstName: "",
       lastName: "",
       age: 0,

@@ -10,7 +10,11 @@
               </v-row>
             </template>
             <v-row justify="center">
-              <v-btn type="submit" @click.prevent="pushToDatabase">
+              <v-btn
+                type="submit"
+                :loading="loading"
+                @click.prevent="pushToDatabase"
+              >
                 Submit
               </v-btn>
             </v-row>
@@ -21,7 +25,12 @@
     <v-row>
       <v-col>
         <div class="error-container">
-          <v-alert closable>{{ updateResponse }}</v-alert>
+          <v-alert
+            :text="updateResponse"
+            class="multi-line"
+            :type="alertType"
+            closable
+          ></v-alert>
         </div>
       </v-col>
     </v-row>
@@ -29,7 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type IAttendeeDataIndex, type IAddRowResponse } from "@/interfaces";
+import { IAttendeeDataIndex, IAddRowResponse, alertTypes } from "@/interfaces";
 import Prisma from "@prisma/client";
 </script>
 
@@ -40,6 +49,8 @@ export default defineNuxtComponent({
     information: [] as IAttendeeDataIndex[],
     example: "",
     updateResponse: "",
+    loading: false,
+    alertType: undefined as alertTypes,
   }),
   methods: {
     updateInfo(info: Prisma.Attendee, row: number) {
@@ -51,24 +62,33 @@ export default defineNuxtComponent({
       }
     },
     async pushToDatabase() {
-      for (const row of this.information) {
-        if (row.data.firstName != "" && row.data.lastName != "") {
-          try {
-            const response = await $fetch<IAddRowResponse>("/api/addRow", {
-              method: "POST",
-              body: row,
-            });
-            if (response.status === "success") {
-              console.log("write successful");
-              this.updateResponse = "write successful";
-            } else {
-              console.error("write failed");
-              this.updateResponse = "write failed";
+      this.updateResponse = "";
+      this.loading = true;
+      try {
+        for (const row of this.information) {
+          if (row.data.firstName != "" && row.data.lastName != "") {
+            try {
+              const response = await $fetch<IAddRowResponse>("/api/addRow", {
+                method: "POST",
+                body: row,
+              });
+              if (response.status === "success") {
+                console.log("write successful");
+                this.updateResponse +=
+                  "write successful, " + response.info + "\n";
+                this.alertType = "success";
+              } else {
+                console.error("write failed");
+                this.updateResponse = "write failed";
+                this.alertType = "error";
+              }
+            } catch (error) {
+              console.error(error);
             }
-          } catch (error) {
-            console.error(error);
           }
         }
+      } finally {
+        this.loading = false;
       }
     },
   },
@@ -76,4 +96,8 @@ export default defineNuxtComponent({
 });
 </script>
 
-<style></style>
+<style>
+.multi-line {
+  white-space: pre-line;
+}
+</style>

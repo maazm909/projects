@@ -6,8 +6,9 @@ export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
     const info = body.data as Prisma.Attendee;
+    const payload = { ...info, checkedIn: true };
     await prisma.attendee.create({
-      data: info,
+      data: payload,
     });
     console.log("write worked");
 
@@ -15,6 +16,7 @@ export default defineEventHandler(async (event) => {
     return new Response(
       JSON.stringify({
         status: "success",
+        info: JSON.stringify(payload), // Include the data that was written if needed
       }),
       {
         headers: {
@@ -31,6 +33,7 @@ export default defineEventHandler(async (event) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         status: "fail: " + error.message, // Include error details if needed
+        info: null,
       }),
       {
         headers: {
