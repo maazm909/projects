@@ -17,9 +17,11 @@ Important Fields for registration:
 16. Zip
 17. TimesCheckedIn
 
+Planning on making separate models for regular registration, quran registration and bazaar registration
+
 TODO
 -
-- Implement global error modal 
+- Implement global error modal (easier said than done)
 - Online
   - Add checkedIn field to Attendee model
   - Create new table for online page that has toggle for checking in
@@ -27,3 +29,4 @@ TODO
   - Toggle should be instant, query should be done after table modification
 - Day Of
   - Implement rules for inputs
+

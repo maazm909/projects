@@ -29,11 +29,8 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  type IAttendeeData,
-  type IAttendeeDataIndex,
-  type IAddRowResponse,
-} from "@/interfaces";
+import { type IAttendeeDataIndex, type IAddRowResponse } from "@/interfaces";
+import Prisma from "@prisma/client";
 </script>
 
 <script lang="ts">
@@ -45,7 +42,7 @@ export default defineNuxtComponent({
     updateResponse: "",
   }),
   methods: {
-    updateInfo(info: IAttendeeData, row: number) {
+    updateInfo(info: Prisma.Attendee, row: number) {
       const match = this.information.find((element) => element.index == row);
       if (match) {
         match.data = info;

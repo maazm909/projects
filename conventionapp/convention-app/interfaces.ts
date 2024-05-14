@@ -1,17 +1,8 @@
-export interface IAttendeeData {
-  firstName: string;
-  lastName: string;
-  age: number;
-  gender: string;
-  email?: string;
-  phoneNumber?: string;
-  discount: number;
-  discountReason: string;
-}
+import Prisma from "@prisma/client";
 
 export interface IAttendeeDataIndex {
   index: number;
-  data: IAttendeeData;
+  data: Prisma.Attendee;
 }
 
 export interface IAddRowResponse {

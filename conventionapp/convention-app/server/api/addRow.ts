@@ -1,19 +1,13 @@
-import { PrismaClient } from "@prisma/client";
-import { IAttendeeData } from "~/interfaces";
+import Prisma from "@prisma/client";
 
-const prisma = new PrismaClient();
+const prisma = new Prisma.PrismaClient();
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const info = body.data as IAttendeeData;
+    const info = body.data as Prisma.Attendee;
     await prisma.attendee.create({
-      data: {
-        firstName: info.firstName,
-        lastName: info.lastName,
-        age: info.age,
-        gender: info.gender,
-      },
+      data: info,
     });
     console.log("write worked");
 
@@ -32,7 +26,19 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     // console.error(error.message);
     console.log("failed write");
-    throw error;
+    return new Response(
+      JSON.stringify({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        status: "fail: " + error.message, // Include error details if needed
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // status: 200, // Set a success status code if needed
+      },
+    );
 
     // // Send an error response back to the client
     // return new Response(

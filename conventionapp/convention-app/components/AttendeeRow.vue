@@ -19,8 +19,8 @@
       </v-col>
       <v-col>
         <v-radio-group v-model="info.gender">
-          <v-radio label="Male" value="male"></v-radio>
-          <v-radio label="Female" value="female"></v-radio>
+          <v-radio label="Male" value="Male"></v-radio>
+          <v-radio label="Female" value="Female"></v-radio>
         </v-radio-group>
       </v-col>
     </v-row>
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { IAttendeeData } from "~/interfaces";
+import Prisma from "@prisma/client";
 </script>
 
 <script lang="ts">
@@ -38,11 +38,13 @@ export default defineNuxtComponent({
   },
   data: () => ({
     info: {
+      id: -1,
       firstName: "",
       lastName: "",
       age: 0,
-      gender: "male",
-    } as IAttendeeData,
+      gender: "Male",
+      checkedIn: false,
+    } as Prisma.Attendee,
     rules: [
       (value: string) => {
         if (value) return true;

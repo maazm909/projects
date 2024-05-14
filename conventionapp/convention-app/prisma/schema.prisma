@@ -37,11 +37,30 @@ model User {
 }
 
 model Attendee {
-  id         Int     @id @default(autoincrement())
-  firstName  String
-  lastName   String
-  age        Int
-  gender     String
-  quranComp  String?
-  quranLevel String?
+  id        Int     @id @default(autoincrement())
+  firstName String
+  lastName  String
+  age       Int
+  gender    String
+  checkedIn Boolean @default(false)
+}
+
+model QuranAttendee {
+  id        Int     @id @default(autoincrement())
+  firstName String
+  lastName  String
+  age       Int
+  gender    String
+  checkedIn Boolean @default(false)
+  level     Int
+}
+
+model BazaarSponsor {
+  id              Int    @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  age             Int
+  gender          String
+  numberCheckedIn Int
+  totalNumber     Int
 }
