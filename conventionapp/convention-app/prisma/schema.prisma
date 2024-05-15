@@ -55,12 +55,24 @@ model QuranAttendee {
   level     Int
 }
 
-model BazaarSponsor {
+model BazaarSponsorGroup {
   id              Int    @id @default(autoincrement())
   firstName       String
   lastName        String
   age             Int
   gender          String
+  email           String
+  numberCheckedIn Int
+  totalNumber     Int
+}
+
+model SpeakerAndGroup {
+  id              Int    @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  age             Int
+  gender          String
+  email           String
   numberCheckedIn Int
   totalNumber     Int
 }

@@ -45,7 +45,7 @@ import Prisma from "@prisma/client";
 <script lang="ts">
 export default defineNuxtComponent({
   data: () => ({
-    rowCount: 3,
+    rowCount: 7,
     information: [] as IAttendeeDataIndex[],
     example: "",
     updateResponse: "",
