@@ -29,12 +29,18 @@
 
 <script lang="ts" setup>
 import Prisma from "@prisma/client";
+import AttendeeModel from "~/models/AttendeeModel";
 </script>
 
 <script lang="ts">
 export default defineNuxtComponent({
   props: {
     rowIndex: Number,
+    information: {
+      type: Object as PropType<Prisma.Attendee>,
+      required: false,
+      default: {},
+    },
   },
   data: () => ({
     info: {
@@ -61,6 +67,12 @@ export default defineNuxtComponent({
       handler() {
         console.log("changeup");
         this.$emit("infoChange", this.info, this.rowIndex);
+      },
+      deep: true,
+    },
+    information: {
+      handler() {
+        this.info = AttendeeModel.hydrateAttendee(this.information);
       },
       deep: true,
     },
