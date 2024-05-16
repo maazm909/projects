@@ -23,7 +23,7 @@ TODO
 -
 - Implement global error modal (easier said than done)
 - Online
-  - Add checkedIn field to Attendee model
+  - ~~Add checkedIn field to Attendee model~~
   - Create new table for online page that has toggle for checking in
   - Search should check relevant fields each time text field is modified
   - Toggle should be instant, query should be done after table modification
