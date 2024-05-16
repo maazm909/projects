@@ -10,12 +10,4 @@ export interface IAddRowResponse {
   info: string;
 }
 
-// export enum alertTypes {
-//   success = "success",
-//   error = "error",
-//   warning = "warning",
-//   info = "info",
-//   none = undefined,
-// }
-
 export type alertTypes = "success" | "error" | "warning" | "info" | undefined;
