@@ -3,10 +3,14 @@
     <v-row justify="center">
       <v-sheet width="100%">
         <v-form>
-          <v-container fluid>
+          <v-container class="row-container" fluid>
             <template v-for="n in rowCount" :key="n">
               <v-row>
-                <AttendeeRow :row-index="n" @info-change="updateInfo" />
+                <AttendeeRow
+                  class="row"
+                  :row-index="n"
+                  @info-change="updateInfo"
+                />
               </v-row>
             </template>
             <v-row justify="center">
@@ -26,6 +30,7 @@
       <v-col>
         <div class="error-container">
           <v-alert
+            v-model="isAlertOpen"
             :text="updateResponse"
             class="multi-line"
             :type="alertType"
@@ -51,6 +56,7 @@ export default defineNuxtComponent({
     updateResponse: "",
     loading: false,
     alertType: undefined as alertTypes,
+    isAlertOpen: false,
   }),
   methods: {
     updateInfo(info: Prisma.Attendee, row: number) {
@@ -89,6 +95,7 @@ export default defineNuxtComponent({
         }
       } finally {
         this.loading = false;
+        this.isAlertOpen = true;
       }
     },
   },
@@ -99,5 +106,9 @@ export default defineNuxtComponent({
 <style>
 .multi-line {
   white-space: pre-line;
+}
+.row {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 </style>
