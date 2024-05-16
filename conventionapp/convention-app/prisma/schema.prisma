@@ -41,6 +41,7 @@ model Attendee {
   firstName String
   lastName  String
   age       Int
+  email     String
   gender    String
   checkedIn Boolean @default(false)
 }
@@ -51,6 +52,7 @@ model QuranAttendee {
   lastName  String
   age       Int
   gender    String
+  email     String
   checkedIn Boolean @default(false)
   level     Int
 }
