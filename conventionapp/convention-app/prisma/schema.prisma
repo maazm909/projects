@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -36,14 +37,25 @@ model User {
   profile Profile?
 }
 
+// day of
 model Attendee {
-  id        Int     @id @default(autoincrement())
-  firstName String
-  lastName  String
-  age       Int
-  email     String
-  gender    String
-  checkedIn Boolean @default(false)
+  id             Int     @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  age            Int
+  email          String
+  gender         String
+  checkedIn      Boolean @default(false)
+  timesCheckedIn Int
+}
+
+model OnlineGroup {
+  id             String @id
+  firstName      String
+  lastName       String
+  email          String
+  totalTickets   Int
+  timesCheckedIn Int
 }
 
 model QuranAttendee {
