@@ -20,8 +20,7 @@ Important Fields for registration:
 Planning on making separate models for regular registration, quran registration and bazaar registration
 
 TODO
-- Add update button to attendee row
-- Change how attendee search handles row change, use update button click event
+- Implement search bar for day of attendees so able to query by string
 - For quran search, may be worth trying to use v-data-table and brainstorm how to edit, best way may be to have edit popup for all data except checkedIn
 - For quran search, filters for each level
 
