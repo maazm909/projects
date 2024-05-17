@@ -5,10 +5,12 @@ const prisma = new Prisma.PrismaClient();
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const info = body.data as Prisma.Attendee;
-    const payload = { ...info, checkedIn: true };
+    delete body.data.id;
+    const info = body.data as Prisma.Prisma.AttendeeCreateInput;
+    info.checkedIn = true;
+    info.timesCheckedIn = 1;
     await prisma.attendee.create({
-      data: payload,
+      data: info,
     });
     console.log("write worked");
 
@@ -16,7 +18,7 @@ export default defineEventHandler(async (event) => {
     return new Response(
       JSON.stringify({
         status: "success",
-        info: JSON.stringify(payload), // Include the data that was written if needed
+        info: JSON.stringify(info), // Include the data that was written if needed
       }),
       {
         headers: {
@@ -27,7 +29,9 @@ export default defineEventHandler(async (event) => {
     );
   } catch (error) {
     // console.error(error.message);
-    console.log("failed write");
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    console.log(error.message);
     return new Response(
       JSON.stringify({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

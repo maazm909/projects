@@ -10,33 +10,16 @@ export default defineEventHandler(async (event) => {
       where: { id: info.id },
       data: info,
     });
-    return new Response(
-      JSON.stringify({
-        updateStatus: "success",
-        info: JSON.stringify(updated), // Include the data that was written if needed
-      }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        status: 200,
-      },
-    );
+    return updated;
   } catch (error) {
-    console.log("failed update");
-    return new Response(
-      JSON.stringify({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        updateStatus: "fail: " + error.message, // Include error details if needed
-        info: null,
-      }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        status: 500, // Set a success status code if needed
-      },
-    );
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    console.log("failed update", error.message);
+    throw createError({
+      statusCode: 500,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      statusMessage: error.message,
+    });
   }
 });
