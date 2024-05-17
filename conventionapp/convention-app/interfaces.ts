@@ -18,3 +18,8 @@ export type RowModes =
   | "create-quran"
   | "search-quran"
   | "search-online";
+
+export enum Gender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+}

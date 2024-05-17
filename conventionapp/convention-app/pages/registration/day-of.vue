@@ -8,7 +8,7 @@
               <v-row>
                 <AttendeeRow
                   mode="create-attendee"
-                  class="row"
+                  class="attendee-row"
                   :row-index="n"
                   @info-change="updateInfo"
                 />
@@ -115,7 +115,7 @@ export default defineNuxtComponent({
 .multi-line {
   white-space: pre-line;
 }
-.row {
+.attendee-row {
   padding-top: 0;
   padding-bottom: 0;
 }

@@ -19,21 +19,31 @@
       </v-col>
       <v-col>
         <v-radio-group v-model="info.gender">
-          <v-radio label="Male" value="Male"></v-radio>
-          <v-radio label="Female" value="Female"></v-radio>
+          <v-radio label="Male" :value="Gender.MALE"></v-radio>
+          <v-radio label="Female" :value="Gender.FEMALE"></v-radio>
         </v-radio-group>
       </v-col>
       <v-col v-if="mode === 'search-online'">
         <v-checkbox label="Checked In" v-model="info.checkedIn"></v-checkbox>
       </v-col>
-      <v-col>
+      <v-col
+        v-if="
+          ['search-attendee', 'search-quran', 'search-online'].includes(mode)
+        "
+      >
         <v-text-field
           label="Times Checked In"
           v-model.number="info.timesCheckedIn"
           type="number"
         ></v-text-field>
       </v-col>
-      <!-- add update button -->
+      <v-col
+        v-if="
+          ['search-attendee', 'search-quran', 'search-online'].includes(mode)
+        "
+      >
+        <v-btn @click="updateClicked">Update</v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -41,8 +51,8 @@
 <script lang="ts" setup>
 import Prisma from "@prisma/client";
 import { PropType } from "vue";
-import { RowModes } from "~/interfaces";
-import AttendeeModel from "~/models/AttendeeModel";
+import { RowModes, Gender } from "@/interfaces";
+import AttendeeModel from "@/models/AttendeeModel";
 </script>
 
 <script lang="ts">
@@ -64,7 +74,7 @@ export default defineNuxtComponent({
       firstName: "",
       lastName: "",
       age: 0,
-      gender: "Male",
+      gender: Gender.MALE,
       checkedIn: false,
     } as Prisma.Attendee,
     rules: [
@@ -75,6 +85,11 @@ export default defineNuxtComponent({
       },
     ],
   }),
+  methods: {
+    updateClicked() {
+      this.$emit("updateClicked", this.info, this.rowIndex);
+    },
+  },
   mounted() {
     // emit info to parent component to track
     this.$emit("infoChange", this.info, this.rowIndex);
@@ -96,7 +111,7 @@ export default defineNuxtComponent({
       deep: true,
     },
   },
-  emits: ["infoChange"],
+  emits: ["infoChange", "updateClicked"],
 });
 </script>
 
