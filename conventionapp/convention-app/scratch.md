@@ -20,13 +20,8 @@ Important Fields for registration:
 Planning on making separate models for regular registration, quran registration and bazaar registration
 
 TODO
--
-- Implement global error modal (easier said than done)
-- Online
-  - ~~Add checkedIn field to Attendee model~~
-  - Create new table for online page that has toggle for checking in
-  - Search should check relevant fields each time text field is modified
-  - Toggle should be instant, query should be done after table modification
-- Day Of
-  - Implement rules for inputs
+- Add update button to attendee row
+- Change how attendee search handles row change, use update button click event
+- For quran search, may be worth trying to use v-data-table and brainstorm how to edit, best way may be to have edit popup for all data except checkedIn
+- For quran search, filters for each level
 
