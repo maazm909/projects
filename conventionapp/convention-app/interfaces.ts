@@ -5,9 +5,16 @@ export interface IAttendeeDataIndex {
   data: Prisma.Attendee;
 }
 
-export interface IAddRowResponse {
+export interface IPrismaFetchResponse {
   status: string;
   info: string;
 }
 
-export type alertTypes = "success" | "error" | "warning" | "info" | undefined;
+export type AlertTypes = "success" | "error" | "warning" | "info" | undefined;
+
+export type RowModes =
+  | "create-attendee"
+  | "search-attendee"
+  | "create-quran"
+  | "search-quran"
+  | "search-online";
