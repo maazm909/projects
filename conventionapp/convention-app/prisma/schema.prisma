@@ -44,7 +44,7 @@ model Attendee {
   lastName       String
   age            Int
   email          String
-  gender         String
+  gender         Gender
   checkedIn      Boolean @default(false)
   timesCheckedIn Int
 }
@@ -89,4 +89,9 @@ model SpeakerAndGroup {
   email           String
   numberCheckedIn Int
   totalNumber     Int
+}
+
+enum Gender {
+  MALE
+  FEMALE
 }
