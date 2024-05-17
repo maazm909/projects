@@ -5,6 +5,9 @@
       <RouterLink to="/registration/day-of">
         <v-btn>Day Of</v-btn>
       </RouterLink>
+      <RouterLink to="/registration/attendee-search">
+        <v-btn>Day Of Search</v-btn>
+      </RouterLink>
       <RouterLink to="/registration/online">
         <v-btn>Online</v-btn>
       </RouterLink>
