@@ -7,6 +7,7 @@
             <template v-for="n in rowCount" :key="n">
               <v-row>
                 <AttendeeRow
+                  mode="create-attendee"
                   class="row"
                   :row-index="n"
                   @info-change="updateInfo"
@@ -43,7 +44,11 @@
 </template>
 
 <script lang="ts" setup>
-import { IAttendeeDataIndex, IAddRowResponse, alertTypes } from "@/interfaces";
+import {
+  IAttendeeDataIndex,
+  AlertTypes,
+  IPrismaFetchResponse,
+} from "@/interfaces";
 import Prisma from "@prisma/client";
 </script>
 
@@ -55,7 +60,7 @@ export default defineNuxtComponent({
     example: "",
     updateResponse: "",
     loading: false,
-    alertType: undefined as alertTypes,
+    alertType: undefined as AlertTypes,
     isAlertOpen: false,
   }),
   methods: {
@@ -74,10 +79,13 @@ export default defineNuxtComponent({
         for (const row of this.information) {
           if (row.data.firstName != "" && row.data.lastName != "") {
             try {
-              const response = await $fetch<IAddRowResponse>("/api/addRow", {
-                method: "POST",
-                body: row,
-              });
+              const response = await $fetch<IPrismaFetchResponse>(
+                "/api/addRow",
+                {
+                  method: "POST",
+                  body: row,
+                },
+              );
               if (response.status === "success") {
                 console.log("write successful");
                 this.updateResponse +=
