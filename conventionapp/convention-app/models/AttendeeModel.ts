@@ -13,6 +13,7 @@ export default class AttendeeModel {
       email: initialData.email ?? "",
       gender: initialData.gender ?? "",
       checkedIn: initialData.checkedIn ?? false,
+      timesCheckedIn: initialData.timesCheckedIn ?? 0,
     };
   }
 }
