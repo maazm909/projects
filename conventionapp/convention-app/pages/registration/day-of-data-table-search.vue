@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/valid-v-slot -->
 <template>
   <v-container fluid>
     <v-alert class="alert" :text="updateResponse" :type="alertType"></v-alert>
