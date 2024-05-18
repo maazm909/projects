@@ -20,7 +20,14 @@ Important Fields for registration:
 Planning on making separate models for regular registration, quran registration and bazaar registration
 
 TODO
-- Implement search bar for day of attendees so able to query by string
-- For quran search, may be worth trying to use v-data-table and brainstorm how to edit, best way may be to have edit popup for all data except checkedIn
-- For quran search, filters for each level
+- Implement online check in numbers
+- Create bazaar and speaker search pages
+- Implement extraLanyards field on all models
+- Implement analytics on home page
+    - Number of lanyards given out (timesCheckedIn + extraLanyards)
+    - Number of people checked in 
+        - (DAY OF) sum of timesCheckedIn
+        - (ONLINE) sum of timesCheckedIn
+        - (BAZAAR) sum of timesCheckedIn
+        - (SPEAKER) sum of timesCheckedIn
 
