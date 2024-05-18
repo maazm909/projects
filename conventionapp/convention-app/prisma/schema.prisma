@@ -50,7 +50,7 @@ model Attendee {
 }
 
 model OnlineGroup {
-  id             String @id
+  id             Int    @id
   firstName      String
   lastName       String
   email          String
