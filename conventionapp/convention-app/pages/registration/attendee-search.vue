@@ -96,7 +96,7 @@ export default defineNuxtComponent({
     try {
       const response = await $fetch<Prisma.Attendee[]>("/api/getAttendees", {
         method: "POST",
-        body: { query: "" },
+        body: { query: "", model: "attendee" },
       });
       this.currentData = response;
     } catch (error) {

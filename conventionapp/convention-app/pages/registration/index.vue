@@ -8,6 +8,9 @@
       <RouterLink to="/registration/attendee-search">
         <v-btn>Day Of Search</v-btn>
       </RouterLink>
+      <RouterLink to="/registration/day-of-data-table-search">
+        <v-btn>Prototype Data Table</v-btn>
+      </RouterLink>
       <RouterLink to="/registration/online">
         <v-btn>Online</v-btn>
       </RouterLink>

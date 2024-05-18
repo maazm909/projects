@@ -1,17 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Prisma from "@prisma/client";
 
 const prisma = new Prisma.PrismaClient();
+
+type ModelName = keyof typeof prisma;
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
     console.log(body);
     let response;
+    const modelName = body.model as ModelName;
+    if (!modelName) {
+      throw createError({
+        status: 400,
+        message: "Model name is required",
+      });
+    }
+    if (!(modelName in prisma)) {
+      throw createError({
+        status: 400,
+        message: `Invalid or missing model`,
+      });
+    }
+    const model = prisma[modelName as ModelName];
+
     if (body.query === "") {
       // get all attendees
-      response = await prisma.attendee.findMany();
+      response = await (model as any).findMany();
     } else {
-      response = await prisma.attendee.findMany({
+      response = await (model as any).findMany({
         where: {
           OR: [
             {
