@@ -5,14 +5,11 @@
       <RouterLink to="/registration/day-of">
         <v-btn>Day Of</v-btn>
       </RouterLink>
-      <RouterLink to="/registration/attendee-search">
+      <RouterLink to="/registration/day-of-search">
         <v-btn>Day Of Search</v-btn>
       </RouterLink>
-      <RouterLink to="/registration/day-of-data-table-search">
-        <v-btn>Prototype Data Table</v-btn>
-      </RouterLink>
-      <RouterLink to="/registration/online">
-        <v-btn>Online</v-btn>
+      <RouterLink to="/registration/online-search">
+        <v-btn>Online Search</v-btn>
       </RouterLink>
       <RouterLink to="/registration/scan">
         <v-btn>Scan Tickets</v-btn>

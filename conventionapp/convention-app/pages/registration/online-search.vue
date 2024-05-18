@@ -12,7 +12,13 @@
       hide-default-footer
     >
       <template #item.actions="{ item }">
-        <v-btn @click="incrementTimesCheckedIn(item)">Add Check In</v-btn>
+        <v-text-field
+          type="number"
+          label="Check In Number"
+          :max="item.totalTickets"
+        ></v-text-field>
+        <v-btn @click="updateTimesCheckedIn(item)">Check In</v-btn>
+        <v-btn @click="incrementTimesCheckedIn(item)">Lost Lanyard</v-btn>
       </template>
     </v-data-table>
   </v-container>
@@ -26,7 +32,7 @@ import { AlertTypes } from "@/interfaces";
 <script lang="ts">
 export default defineNuxtComponent({
   data: () => ({
-    rows: [] as Prisma.Attendee[],
+    rows: [] as Prisma.OnlineGroup[],
     headers: [
       { title: "ID", value: "id" },
       { title: "First Name", value: "firstName" },
@@ -44,7 +50,8 @@ export default defineNuxtComponent({
     isSnackbarOpen: true,
   }),
   methods: {
-    async incrementTimesCheckedIn(item: Prisma.Attendee) {
+    async updateTimesCheckedIn(item: Prisma.OnlineGroup) {},
+    async incrementTimesCheckedIn(item: Prisma.OnlineGroup) {
       const received = { ...item };
       this.updateResponse = "Placeholder for update response";
       this.loading = true;
@@ -82,16 +89,16 @@ export default defineNuxtComponent({
         this.isAlertOpen = true;
       }
     },
-    attendeeById(id: number): Prisma.Attendee | undefined {
+    attendeeById(id: number): Prisma.OnlineGroup | undefined {
       const found = this.rows.find((attendee) => attendee.id === id);
       return found;
     },
   },
   async created() {
     try {
-      const response = await $fetch<Prisma.Attendee[]>("/api/getAttendees", {
+      const response = await $fetch<Prisma.OnlineGroup[]>("/api/getAttendees", {
         method: "POST",
-        body: { query: "", model: "attendee" },
+        body: { query: "", model: "onlineGroup" },
       });
       this.rows = response;
     } catch (error) {
