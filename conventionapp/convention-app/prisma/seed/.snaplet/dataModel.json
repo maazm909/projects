@@ -175,6 +175,20 @@
           "maxLength": 191
         },
         {
+          "id": "mydb.attendee.extraLanyards",
+          "name": "extraLanyards",
+          "columnName": "extraLanyards",
+          "type": "int",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
           "id": "mydb.attendee.firstName",
           "name": "firstName",
           "columnName": "firstName",
@@ -292,6 +306,20 @@
           "maxLength": 191
         },
         {
+          "id": "mydb.bazaarsponsorgroup.extraLanyards",
+          "name": "extraLanyards",
+          "columnName": "extraLanyards",
+          "type": "int",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
           "id": "mydb.bazaarsponsorgroup.firstName",
           "name": "firstName",
           "columnName": "firstName",
@@ -309,7 +337,7 @@
           "id": "mydb.bazaarsponsorgroup.gender",
           "name": "gender",
           "columnName": "gender",
-          "type": "varchar",
+          "type": "enum_mydb_bazaarsponsorgroup_gender",
           "isRequired": true,
           "kind": "scalar",
           "isList": false,
@@ -317,7 +345,7 @@
           "sequence": false,
           "hasDefaultValue": false,
           "isId": false,
-          "maxLength": 191
+          "maxLength": 6
         },
         {
           "id": "mydb.bazaarsponsorgroup.id",
@@ -352,9 +380,9 @@
           "maxLength": 191
         },
         {
-          "id": "mydb.bazaarsponsorgroup.numberCheckedIn",
-          "name": "numberCheckedIn",
-          "columnName": "numberCheckedIn",
+          "id": "mydb.bazaarsponsorgroup.timesCheckedIn",
+          "name": "timesCheckedIn",
+          "columnName": "timesCheckedIn",
           "type": "int",
           "isRequired": true,
           "kind": "scalar",
@@ -409,6 +437,20 @@
           "maxLength": 191
         },
         {
+          "id": "mydb.onlinegroup.extraLanyards",
+          "name": "extraLanyards",
+          "columnName": "extraLanyards",
+          "type": "int",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
           "id": "mydb.onlinegroup.firstName",
           "name": "firstName",
           "columnName": "firstName",
@@ -426,7 +468,7 @@
           "id": "mydb.onlinegroup.id",
           "name": "id",
           "columnName": "id",
-          "type": "varchar",
+          "type": "int",
           "isRequired": true,
           "kind": "scalar",
           "isList": false,
@@ -434,7 +476,7 @@
           "sequence": false,
           "hasDefaultValue": false,
           "isId": true,
-          "maxLength": 191
+          "maxLength": null
         },
         {
           "id": "mydb.onlinegroup.lastName",
@@ -773,7 +815,7 @@
           "id": "mydb.quranattendee.gender",
           "name": "gender",
           "columnName": "gender",
-          "type": "varchar",
+          "type": "enum_mydb_quranattendee_gender",
           "isRequired": true,
           "kind": "scalar",
           "isList": false,
@@ -781,7 +823,7 @@
           "sequence": false,
           "hasDefaultValue": false,
           "isId": false,
-          "maxLength": 191
+          "maxLength": 6
         },
         {
           "id": "mydb.quranattendee.id",
@@ -873,6 +915,20 @@
           "maxLength": 191
         },
         {
+          "id": "mydb.speakerandgroup.extraLanyards",
+          "name": "extraLanyards",
+          "columnName": "extraLanyards",
+          "type": "int",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
           "id": "mydb.speakerandgroup.firstName",
           "name": "firstName",
           "columnName": "firstName",
@@ -890,7 +946,7 @@
           "id": "mydb.speakerandgroup.gender",
           "name": "gender",
           "columnName": "gender",
-          "type": "varchar",
+          "type": "enum_mydb_speakerandgroup_gender",
           "isRequired": true,
           "kind": "scalar",
           "isList": false,
@@ -898,7 +954,7 @@
           "sequence": false,
           "hasDefaultValue": false,
           "isId": false,
-          "maxLength": 191
+          "maxLength": 6
         },
         {
           "id": "mydb.speakerandgroup.id",
@@ -933,9 +989,9 @@
           "maxLength": 191
         },
         {
-          "id": "mydb.speakerandgroup.numberCheckedIn",
-          "name": "numberCheckedIn",
-          "columnName": "numberCheckedIn",
+          "id": "mydb.speakerandgroup.timesCheckedIn",
+          "name": "timesCheckedIn",
+          "columnName": "timesCheckedIn",
           "type": "int",
           "isRequired": true,
           "kind": "scalar",
@@ -1068,6 +1124,39 @@
   },
   "enums": {
     "enum_mydb_attendee_gender": {
+      "schemaName": "mydb",
+      "values": [
+        {
+          "name": "MALE"
+        },
+        {
+          "name": "FEMALE"
+        }
+      ]
+    },
+    "enum_mydb_bazaarsponsorgroup_gender": {
+      "schemaName": "mydb",
+      "values": [
+        {
+          "name": "MALE"
+        },
+        {
+          "name": "FEMALE"
+        }
+      ]
+    },
+    "enum_mydb_quranattendee_gender": {
+      "schemaName": "mydb",
+      "values": [
+        {
+          "name": "MALE"
+        },
+        {
+          "name": "FEMALE"
+        }
+      ]
+    },
+    "enum_mydb_speakerandgroup_gender": {
       "schemaName": "mydb",
       "values": [
         {
