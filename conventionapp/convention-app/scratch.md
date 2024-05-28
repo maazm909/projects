@@ -22,7 +22,6 @@ Planning on making separate models for regular registration, quran registration 
 TODO
 - Implement online check in numbers
 - Create bazaar and speaker search pages
-- Implement extraLanyards field on all models
 - Implement analytics on home page
     - Number of lanyards given out (timesCheckedIn + extraLanyards)
     - Number of people checked in 
