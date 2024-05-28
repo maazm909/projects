@@ -15,6 +15,7 @@ export default class AttendeeModel {
       gender: initialData.gender ?? Gender.MALE,
       checkedIn: initialData.checkedIn ?? false,
       timesCheckedIn: initialData.timesCheckedIn ?? 0,
+      extraLanyards: initialData.extraLanyards ?? 0,
     };
   }
 }

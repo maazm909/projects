@@ -9,10 +9,11 @@
       :items="rows"
       :items-per-page="-1"
       :search="search"
+      :loading="loading"
       hide-default-footer
     >
       <template #item.actions="{ item }">
-        <v-btn @click="incrementTimesCheckedIn(item)">Lost Lanyard</v-btn>
+        <v-btn @click="incrementExtraLanyards(item)">Lost Lanyard</v-btn>
       </template>
     </v-data-table>
   </v-container>
@@ -33,7 +34,7 @@ export default defineNuxtComponent({
       { title: "Last Name", value: "lastName" },
       { title: "Age", value: "age" },
       { title: "Gender", value: "gender" },
-      { title: "# of Times Checked In", value: "timesCheckedIn" },
+      { title: "# of Times Lanyards Lost", value: "extraLanyards" },
       { title: "Actions", key: "actions", sortable: false },
     ],
     updateResponse: "Placeholder for update response",
@@ -44,7 +45,7 @@ export default defineNuxtComponent({
     isSnackbarOpen: true,
   }),
   methods: {
-    async incrementTimesCheckedIn(item: Prisma.Attendee) {
+    async incrementExtraLanyards(item: Prisma.Attendee) {
       const received = { ...item };
       this.updateResponse = "Placeholder for update response";
       this.loading = true;
@@ -56,7 +57,7 @@ export default defineNuxtComponent({
         this.alertType = "error";
         return;
       }
-      received.timesCheckedIn += 1;
+      received.extraLanyards += 1;
       // check if received info is same as current info, if so, don't send, set v alert message to same info
       // call update attendee, pass in info
       try {
@@ -88,6 +89,7 @@ export default defineNuxtComponent({
     },
   },
   async created() {
+    this.loading = true;
     try {
       const response = await $fetch<Prisma.Attendee[]>("/api/getAttendees", {
         method: "POST",
@@ -98,6 +100,8 @@ export default defineNuxtComponent({
       console.error(error);
       this.updateResponse = "initial get all failed";
       this.alertType = "error";
+    } finally {
+      this.loading = false;
     }
   },
 });
