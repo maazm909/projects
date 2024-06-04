@@ -1,5 +1,7 @@
 import Prisma from "@prisma/client";
 
+import { DateTime } from "luxon";
+
 const prisma = new Prisma.PrismaClient();
 
 export default defineEventHandler(async (event) => {
@@ -9,6 +11,7 @@ export default defineEventHandler(async (event) => {
     const info = body.data as Prisma.Prisma.AttendeeCreateInput;
     info.checkedIn = true;
     info.timesCheckedIn = 1;
+    info.firstCheckedIn = DateTime.now().toString();
     await prisma.attendee.create({
       data: info,
     });
