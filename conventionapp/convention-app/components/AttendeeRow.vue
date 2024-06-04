@@ -12,6 +12,12 @@
       </v-col>
       <v-col>
         <v-text-field
+          label="Phone Number"
+          v-model="info.phoneNumber"
+        ></v-text-field>
+      </v-col>
+      <v-col>
+        <v-text-field
           label="Age"
           v-model.number="info.age"
           type="number"
