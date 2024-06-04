@@ -39,25 +39,28 @@ model User {
 
 // day of
 model Attendee {
-  id             Int     @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   firstName      String
   lastName       String
+  phoneNumber    String
   age            Int
   email          String
   gender         Gender
-  checkedIn      Boolean @default(false)
+  checkedIn      Boolean  @default(false)
   timesCheckedIn Int
   extraLanyards  Int
+  firstCheckedIn DateTime
 }
 
 model OnlineGroup {
-  id             Int    @id
+  id             Int       @id
   firstName      String
   lastName       String
   email          String
   totalTickets   Int
   timesCheckedIn Int
   extraLanyards  Int
+  firstCheckedIn DateTime?
 }
 
 model QuranAttendee {
@@ -72,7 +75,7 @@ model QuranAttendee {
 }
 
 model BazaarSponsorGroup {
-  id             Int    @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   firstName      String
   lastName       String
   age            Int
@@ -81,10 +84,11 @@ model BazaarSponsorGroup {
   timesCheckedIn Int
   totalNumber    Int
   extraLanyards  Int
+  firstCheckedIn DateTime?
 }
 
 model SpeakerAndGroup {
-  id             Int    @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   firstName      String
   lastName       String
   age            Int
@@ -93,6 +97,7 @@ model SpeakerAndGroup {
   timesCheckedIn Int
   totalNumber    Int
   extraLanyards  Int
+  firstCheckedIn DateTime?
 }
 
 enum Gender {
