@@ -4,12 +4,12 @@
       <v-sheet width="100%">
         <v-form>
           <v-container class="row-container" fluid>
-            <template v-for="n in rowCount" :key="n">
+            <template v-for="(n, i) in rowCount" :key="i">
               <v-row>
                 <AttendeeRow
                   mode="create-attendee"
                   class="attendee-row"
-                  :row-index="n"
+                  :row-index="i"
                   @info-change="updateInfo"
                 />
               </v-row>
@@ -65,11 +65,29 @@ export default defineNuxtComponent({
   }),
   methods: {
     updateInfo(info: Prisma.Attendee, row: number) {
+      console.log(row);
       const match = this.information.find((element) => element.index == row);
       if (match) {
         match.data = info;
       } else {
         this.information.push({ index: row, data: info });
+      }
+      if (row === 0) {
+        console.log("in row 1");
+        for (let i = 0; i < this.rowCount; i++) {
+          const match = this.information.find((element) => element.index == i);
+          if (match) {
+            match.data.lastName = info.lastName;
+          } else {
+            this.information.push({
+              index: i,
+              data: {
+                ...info,
+                lastName: info.lastName,
+              },
+            });
+          }
+        }
       }
     },
     async pushToDatabase() {
