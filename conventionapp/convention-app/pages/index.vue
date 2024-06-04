@@ -38,12 +38,26 @@ export default defineNuxtComponent({
     ],
   }),
   async created() {
+    const lanyards = this.items.find((item) => item.key === "lanyards")!;
+    const checkedIn = this.items.find((item) => item.key === "checkedIn")!;
     try {
       const response = await $fetch<number>("/api/getAllExtraLanyards", {
         method: "GET",
       });
-      this.items[0].title = response;
+
+      lanyards.title = response;
     } catch (error) {
+      lanyards.title = -1;
+      console.error(error);
+    }
+    try {
+      const response = await $fetch<number>("/api/getAllCheckedIn", {
+        method: "GET",
+      });
+
+      checkedIn.title = response;
+    } catch (error) {
+      checkedIn.title = -1;
       console.error(error);
     }
   },

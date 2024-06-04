@@ -7,28 +7,28 @@ export default defineEventHandler(async () => {
     let totalSum = 0;
     let response = await prisma.attendee.aggregate({
       _sum: {
-        extraLanyards: true,
+        timesCheckedIn: true,
       },
     });
-    totalSum += response._sum?.extraLanyards ?? 0;
+    totalSum += response._sum?.timesCheckedIn ?? 0;
     response = await prisma.onlineGroup.aggregate({
       _sum: {
-        extraLanyards: true,
+        timesCheckedIn: true,
       },
     });
-    totalSum += response._sum?.extraLanyards ?? 0;
+    totalSum += response._sum?.timesCheckedIn ?? 0;
     response = await prisma.bazaarSponsorGroup.aggregate({
       _sum: {
-        extraLanyards: true,
+        timesCheckedIn: true,
       },
     });
-    totalSum += response._sum?.extraLanyards ?? 0;
+    totalSum += response._sum?.timesCheckedIn ?? 0;
     response = await prisma.speakerAndGroup.aggregate({
       _sum: {
-        extraLanyards: true,
+        timesCheckedIn: true,
       },
     });
-    totalSum += response._sum?.extraLanyards ?? 0;
+    totalSum += response._sum?.timesCheckedIn ?? 0;
     return totalSum;
   } catch (error) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
