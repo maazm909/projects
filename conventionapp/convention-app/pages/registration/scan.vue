@@ -24,6 +24,33 @@
           <v-row>
             <v-text-field v-model="fieldValue" :rules="rules"></v-text-field>
           </v-row>
+          <v-row>
+            <v-radio-group
+              inline
+              @update:model-value="
+                (value: any) => {
+                  if (value !== -1) {
+                    customPriceOpen = false;
+                  }
+                  ticketInfo.ticketPrice = value;
+                }
+              "
+            >
+              <v-radio :value="25" label="25"></v-radio>
+              <v-radio :value="20" label="20"></v-radio>
+              <v-radio
+                :value="-1"
+                label="Custom Price"
+                @click="customPriceOpen = true"
+              ></v-radio>
+              <v-text-field
+                class="custom-price-field ml-4"
+                type="number"
+                v-if="customPriceOpen"
+                v-model.number="customPrice"
+              ></v-text-field>
+            </v-radio-group>
+          </v-row>
         </v-container>
       </v-form>
     </v-row>
@@ -41,6 +68,8 @@ export default defineNuxtComponent({
       alreadyPaid: true as boolean,
     },
     fieldValue: "",
+    customPrice: 0 as number,
+    customPriceOpen: false as boolean,
     rules: [
       (value: string) => {
         if (value.length < 6) {
@@ -60,6 +89,9 @@ export default defineNuxtComponent({
         this.ticketInfo.ticketNumbers.push(parseInt(value));
         this.fieldValue = "";
       }
+    },
+    customPrice(value: number) {
+      this.ticketInfo.ticketPrice = value;
     },
   },
 });
