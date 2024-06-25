@@ -73,6 +73,7 @@ export default defineNuxtComponent({
     async updateTimesCheckedIn(item: Prisma.OnlineGroup) {
       const received = { ...item };
       this.updateResponse = "Placeholder for update response";
+      this.alertType = undefined as AlertTypes;
       this.loading = true;
       this.isAlertOpen = false;
       // find attendee by id
@@ -90,6 +91,8 @@ export default defineNuxtComponent({
         this.updateResponse =
           "Unable to check in more than the total number of tickets";
         this.alertType = "error";
+        this.loading = false;
+        this.isAlertOpen = true;
         return;
       }
       received.timesCheckedIn += this.timesCheckedInValues[received.id];
@@ -121,6 +124,7 @@ export default defineNuxtComponent({
     async incrementExtraLanyards(item: Prisma.OnlineGroup) {
       const received = { ...item };
       this.updateResponse = "Placeholder for update response";
+      this.alertType = undefined as AlertTypes;
       this.loading = true;
       this.isAlertOpen = false;
       // find attendee by id
