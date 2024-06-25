@@ -89,7 +89,7 @@ model SpeakerAndGroup {
   firstCheckedIn DateTime?
 }
 
-model physicalTicket {
+model PhysicalTicket {
   ticketNum   Int     @id
   ticketPrice Int
   alreadyPaid Boolean
