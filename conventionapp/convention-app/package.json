@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "start": "nuxt start",
     "postmigrate": "npx @snaplet/seed sync",
     "seed": "npx tsx prisma/seed/seed.ts",
     "migrate": "npx prisma migrate dev --name"
