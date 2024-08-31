@@ -90,9 +90,10 @@ model SpeakerAndGroup {
 }
 
 model PhysicalTicket {
-  ticketNum   Int     @id
-  ticketPrice Int
-  alreadyPaid Boolean
+  ticketNum      Int     @id
+  ticketPrice    Int
+  alreadyPaid    Boolean
+  timesCheckedIn Int
 }
 
 enum Gender {
