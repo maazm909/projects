@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
         ticketNum: info.ticketNum,
         ticketPrice: info.ticketPrice,
         alreadyPaid: info.alreadyPaid,
+        timesCheckedIn: 1,
       },
     });
     return new Response(

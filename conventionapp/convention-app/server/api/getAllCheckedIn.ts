@@ -29,6 +29,12 @@ export default defineEventHandler(async () => {
       },
     });
     totalSum += response._sum?.timesCheckedIn ?? 0;
+    response = await prisma.physicalTicket.aggregate({
+      _sum: {
+        timesCheckedIn: true,
+      },
+    });
+    totalSum += response._sum?.timesCheckedIn ?? 0;
     return totalSum;
   } catch (error) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

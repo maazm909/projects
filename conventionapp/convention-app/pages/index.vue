@@ -27,7 +27,7 @@ export default defineNuxtComponent({
     items: [
       {
         title: 0,
-        subtitle: "# of Lanyards Given Out",
+        subtitle: "# of Extra Lanyards Given Out",
         key: "lanyards",
       },
       {
