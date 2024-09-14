@@ -6,6 +6,10 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
+  devServer: {
+    host: "0.0.0.0", // Allow access from other devices
+    port: 3000, // Specify the port
+  },
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
