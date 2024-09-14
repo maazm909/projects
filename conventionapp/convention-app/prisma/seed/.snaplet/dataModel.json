@@ -133,20 +133,6 @@
       "tableName": "attendee",
       "fields": [
         {
-          "id": "mydb.attendee.age",
-          "name": "age",
-          "columnName": "age",
-          "type": "int",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
           "id": "mydb.attendee.checkedIn",
           "name": "checkedIn",
           "columnName": "checkedIn",
@@ -159,20 +145,6 @@
           "hasDefaultValue": true,
           "isId": false,
           "maxLength": null
-        },
-        {
-          "id": "mydb.attendee.email",
-          "name": "email",
-          "columnName": "email",
-          "type": "varchar",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": 191
         },
         {
           "id": "mydb.attendee.extraLanyards",
@@ -215,20 +187,6 @@
           "hasDefaultValue": false,
           "isId": false,
           "maxLength": 191
-        },
-        {
-          "id": "mydb.attendee.gender",
-          "name": "gender",
-          "columnName": "gender",
-          "type": "enum_mydb_attendee_gender",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": 6
         },
         {
           "id": "mydb.attendee.id",
@@ -465,20 +423,6 @@
       "tableName": "onlinegroup",
       "fields": [
         {
-          "id": "mydb.onlinegroup.email",
-          "name": "email",
-          "columnName": "email",
-          "type": "varchar",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": 191
-        },
-        {
           "id": "mydb.onlinegroup.extraLanyards",
           "name": "extraLanyards",
           "columnName": "extraLanyards",
@@ -538,6 +482,20 @@
           "id": "mydb.onlinegroup.lastName",
           "name": "lastName",
           "columnName": "lastName",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": 191
+        },
+        {
+          "id": "mydb.onlinegroup.phoneNumber",
+          "name": "phoneNumber",
+          "columnName": "phoneNumber",
           "type": "varchar",
           "isRequired": true,
           "kind": "scalar",
@@ -623,20 +581,6 @@
           "id": "mydb.physicalticket.ticketPrice",
           "name": "ticketPrice",
           "columnName": "ticketPrice",
-          "type": "int",
-          "isRequired": true,
-          "kind": "scalar",
-          "isList": false,
-          "isGenerated": false,
-          "sequence": false,
-          "hasDefaultValue": false,
-          "isId": false,
-          "maxLength": null
-        },
-        {
-          "id": "mydb.physicalticket.timesCheckedIn",
-          "name": "timesCheckedIn",
-          "columnName": "timesCheckedIn",
           "type": "int",
           "isRequired": true,
           "kind": "scalar",
@@ -1036,6 +980,137 @@
         }
       ]
     },
+    "ticketholder": {
+      "id": "mydb.ticketholder",
+      "schemaName": "mydb",
+      "tableName": "ticketholder",
+      "fields": [
+        {
+          "id": "mydb.ticketholder.checkedIn",
+          "name": "checkedIn",
+          "columnName": "checkedIn",
+          "type": "tinyint",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": true,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "mydb.ticketholder.extraLanyards",
+          "name": "extraLanyards",
+          "columnName": "extraLanyards",
+          "type": "int",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "mydb.ticketholder.firstCheckedIn",
+          "name": "firstCheckedIn",
+          "columnName": "firstCheckedIn",
+          "type": "datetime",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        },
+        {
+          "id": "mydb.ticketholder.firstName",
+          "name": "firstName",
+          "columnName": "firstName",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": 191
+        },
+        {
+          "id": "mydb.ticketholder.id",
+          "name": "id",
+          "columnName": "id",
+          "type": "int",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": {
+            "identifier": "mydb.ticketholder.id",
+            "increment": 1,
+            "start": 1
+          },
+          "hasDefaultValue": false,
+          "isId": true,
+          "maxLength": null
+        },
+        {
+          "id": "mydb.ticketholder.lastName",
+          "name": "lastName",
+          "columnName": "lastName",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": 191
+        },
+        {
+          "id": "mydb.ticketholder.phoneNumber",
+          "name": "phoneNumber",
+          "columnName": "phoneNumber",
+          "type": "varchar",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": 191
+        },
+        {
+          "id": "mydb.ticketholder.timesCheckedIn",
+          "name": "timesCheckedIn",
+          "columnName": "timesCheckedIn",
+          "type": "int",
+          "isRequired": true,
+          "kind": "scalar",
+          "isList": false,
+          "isGenerated": false,
+          "sequence": false,
+          "hasDefaultValue": false,
+          "isId": false,
+          "maxLength": null
+        }
+      ],
+      "uniqueConstraints": [
+        {
+          "name": "mydb.ticketholder.id",
+          "fields": [
+            "id"
+          ]
+        }
+      ]
+    },
     "user": {
       "id": "mydb.user",
       "schemaName": "mydb",
@@ -1133,17 +1208,6 @@
     }
   },
   "enums": {
-    "enum_mydb_attendee_gender": {
-      "schemaName": "mydb",
-      "values": [
-        {
-          "name": "MALE"
-        },
-        {
-          "name": "FEMALE"
-        }
-      ]
-    },
     "enum_mydb_bazaarsponsorgroup_gender": {
       "schemaName": "mydb",
       "values": [

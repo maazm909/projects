@@ -43,9 +43,6 @@ model Attendee {
   firstName      String
   lastName       String
   phoneNumber    String
-  age            Int
-  email          String
-  gender         Gender
   checkedIn      Boolean  @default(false)
   timesCheckedIn Int
   extraLanyards  Int
@@ -56,7 +53,7 @@ model OnlineGroup {
   id             Int       @id
   firstName      String
   lastName       String
-  email          String
+  phoneNumber    String
   totalTickets   Int
   timesCheckedIn Int
   extraLanyards  Int
@@ -89,11 +86,21 @@ model SpeakerAndGroup {
   firstCheckedIn DateTime?
 }
 
-model PhysicalTicket {
-  ticketNum      Int     @id
-  ticketPrice    Int
-  alreadyPaid    Boolean
+model TicketHolder {
+  id             Int      @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  phoneNumber    String
+  checkedIn      Boolean  @default(false)
   timesCheckedIn Int
+  extraLanyards  Int
+  firstCheckedIn DateTime
+}
+
+model PhysicalTicket {
+  ticketNum   Int     @id
+  ticketPrice Int
+  alreadyPaid Boolean
 }
 
 enum Gender {
