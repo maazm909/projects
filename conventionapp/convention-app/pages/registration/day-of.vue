@@ -4,7 +4,7 @@
       <v-sheet width="100%">
         <v-form>
           <v-container class="row-container" fluid>
-            <template v-for="(n, i) in rowCount" :key="i">
+            <template v-for="i in 1" :key="i">
               <v-row>
                 <AttendeeRow
                   mode="create-attendee"

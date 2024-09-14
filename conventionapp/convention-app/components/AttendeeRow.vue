@@ -18,16 +18,10 @@
       </v-col>
       <v-col>
         <v-text-field
-          label="Age"
-          v-model.number="info.age"
+          label="Number of Attendees"
           type="number"
+          v-model.number="info.timesCheckedIn"
         ></v-text-field>
-      </v-col>
-      <v-col>
-        <v-radio-group v-model="info.gender">
-          <v-radio label="Male" :value="Gender.MALE"></v-radio>
-          <v-radio label="Female" :value="Gender.FEMALE"></v-radio>
-        </v-radio-group>
       </v-col>
       <v-col v-if="mode === 'search-online'">
         <v-checkbox label="Checked In" v-model="info.checkedIn"></v-checkbox>
@@ -57,7 +51,7 @@
 <script lang="ts" setup>
 import Prisma from "@prisma/client";
 import { PropType } from "vue";
-import { RowModes, Gender } from "@/interfaces";
+import { RowModes } from "@/interfaces";
 import AttendeeModel from "@/models/AttendeeModel";
 </script>
 
@@ -79,8 +73,8 @@ export default defineNuxtComponent({
     info: {
       firstName: "",
       lastName: "",
-      age: 0,
-      gender: Gender.MALE,
+      phoneNumber: "",
+      timesCheckedIn: 0,
       checkedIn: false,
     } as Prisma.Attendee,
     rules: [

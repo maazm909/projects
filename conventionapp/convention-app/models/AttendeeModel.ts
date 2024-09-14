@@ -1,5 +1,4 @@
 import Prisma from "@prisma/client";
-import { Gender } from "@/interfaces";
 
 export default class AttendeeModel {
   public static hydrateAttendee(
@@ -10,12 +9,11 @@ export default class AttendeeModel {
       id: initialData.id ?? -1,
       firstName: initialData.firstName ?? "",
       lastName: initialData.lastName ?? "",
-      age: initialData.age ?? 0,
-      email: initialData.email ?? "",
-      gender: initialData.gender ?? Gender.MALE,
+      phoneNumber: initialData.phoneNumber ?? "",
       checkedIn: initialData.checkedIn ?? false,
       timesCheckedIn: initialData.timesCheckedIn ?? 0,
       extraLanyards: initialData.extraLanyards ?? 0,
+      firstCheckedIn: initialData.firstCheckedIn ?? new Date(),
     };
   }
 }
