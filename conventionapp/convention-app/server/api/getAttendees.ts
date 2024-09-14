@@ -47,6 +47,11 @@ export default defineEventHandler(async (event) => {
                 search: body.query,
               },
             },
+            {
+              phoneNumber: {
+                search: body.query,
+              },
+            },
           ],
         },
       });
