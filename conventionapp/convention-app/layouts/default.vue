@@ -8,9 +8,9 @@
         <RouterLink to="/registration">
           <v-btn>Registration</v-btn>
         </RouterLink>
-        <RouterLink to="/bazaar">
+        <!-- <RouterLink to="/bazaar">
           <v-btn>Bazaar</v-btn>
-        </RouterLink>
+        </RouterLink> -->
       </div>
     </div>
     <slot />
