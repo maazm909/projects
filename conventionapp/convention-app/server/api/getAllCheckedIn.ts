@@ -29,7 +29,7 @@ export default defineEventHandler(async () => {
       },
     });
     totalSum += response._sum?.timesCheckedIn ?? 0;
-    response = await prisma.physicalTicket.aggregate({
+    response = await prisma.ticketHolder.aggregate({
       _sum: {
         timesCheckedIn: true,
       },
