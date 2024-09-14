@@ -17,13 +17,19 @@ export default defineEventHandler(async () => {
       },
     });
     totalSum += response._sum?.extraLanyards ?? 0;
-    response = await prisma.bazaarSponsorGroup.aggregate({
-      _sum: {
-        extraLanyards: true,
-      },
-    });
-    totalSum += response._sum?.extraLanyards ?? 0;
-    response = await prisma.speakerAndGroup.aggregate({
+    // response = await prisma.bazaarSponsorGroup.aggregate({
+    //   _sum: {
+    //     extraLanyards: true,
+    //   },
+    // });
+    // totalSum += response._sum?.extraLanyards ?? 0;
+    // response = await prisma.speakerAndGroup.aggregate({
+    //   _sum: {
+    //     extraLanyards: true,
+    //   },
+    // });
+    // totalSum += response._sum?.extraLanyards ?? 0;
+    response = await prisma.ticketHolder.aggregate({
       _sum: {
         extraLanyards: true,
       },
