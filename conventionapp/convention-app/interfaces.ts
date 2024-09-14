@@ -5,6 +5,11 @@ export interface IAttendeeDataIndex {
   data: Prisma.Attendee;
 }
 
+export interface ITicketHolderDataIndex {
+  index: number;
+  data: Prisma.TicketHolder;
+}
+
 export interface IPrismaFetchResponse {
   status: string;
   info: string;
