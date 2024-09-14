@@ -49,7 +49,7 @@ export default defineNuxtComponent({
       { title: "ID", value: "id" },
       { title: "First Name", value: "firstName" },
       { title: "Last Name", value: "lastName" },
-      { title: "Email", value: "email" },
+      { title: "Phone Number", value: "phoneNumber" },
       { title: "Total Number of Tickets", value: "totalTickets" },
       { title: "# of Times Checked In", value: "timesCheckedIn" },
       { title: "Actions", key: "actions", sortable: false },
