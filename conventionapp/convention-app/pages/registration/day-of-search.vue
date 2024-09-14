@@ -33,6 +33,7 @@ export default defineNuxtComponent({
       { title: "First Name", value: "firstName" },
       { title: "Last Name", value: "lastName" },
       { title: "Phone Number", value: "phoneNumber" },
+      { title: "Size of Group", value: "timesCheckedIn" },
       { title: "# of Times Lanyards Lost", value: "extraLanyards" },
       { title: "Actions", key: "actions", sortable: false },
     ],
