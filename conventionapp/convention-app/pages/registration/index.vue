@@ -11,6 +11,12 @@
       <RouterLink to="/registration/online-search">
         <v-btn>Online Search</v-btn>
       </RouterLink>
+      <RouterLink to="/registration/ticketholder">
+        <v-btn>Ticketholder</v-btn>
+      </RouterLink>
+      <RouterLink to="/registration/ticketholder-search">
+        <v-btn>Ticketholder Search</v-btn>
+      </RouterLink>
       <RouterLink to="/registration/scan">
         <v-btn>Scan Tickets</v-btn>
       </RouterLink>
