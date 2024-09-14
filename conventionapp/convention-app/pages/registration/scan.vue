@@ -25,6 +25,15 @@
             <v-text-field v-model="fieldValue" :rules="rules"></v-text-field>
           </v-row>
           <v-row>
+            <h2>Already Paid?</h2>
+          </v-row>
+          <v-row>
+            <v-radio-group inline v-model="ticketInfo.alreadyPaid">
+              <v-radio :value="true" label="Yes"></v-radio>
+              <v-radio :value="false" label="No"></v-radio>
+            </v-radio-group>
+          </v-row>
+          <v-row>
             <h2>Price</h2>
           </v-row>
           <v-row>
@@ -41,8 +50,10 @@
                 }
               "
             >
+              <v-radio :value="30" label="30"></v-radio>
               <v-radio :value="25" label="25"></v-radio>
               <v-radio :value="20" label="20"></v-radio>
+              <v-radio :value="0" label="Family"></v-radio>
               <v-radio :value="-1" label="Custom Price"></v-radio>
               <v-text-field
                 class="custom-price-field ml-4"
@@ -50,15 +61,6 @@
                 v-if="customPriceOpen"
                 v-model.number="customPrice"
               ></v-text-field>
-            </v-radio-group>
-          </v-row>
-          <v-row>
-            <h2>Already Paid?</h2>
-          </v-row>
-          <v-row>
-            <v-radio-group inline v-model="ticketInfo.alreadyPaid">
-              <v-radio :value="true" label="Yes"></v-radio>
-              <v-radio :value="false" label="No"></v-radio>
             </v-radio-group>
           </v-row>
           <v-row justify="center">
