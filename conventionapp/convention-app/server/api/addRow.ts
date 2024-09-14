@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
     delete body.data.id;
     const info = body.data as Prisma.Prisma.AttendeeCreateInput;
     info.checkedIn = true;
-    info.timesCheckedIn = 1;
     info.firstCheckedIn = DateTime.now().toString();
     await prisma.attendee.create({
       data: info,
