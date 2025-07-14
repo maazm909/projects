@@ -1,0 +1,36 @@
+{
+  "name": "ticket-scanner",
+  "version": "1.0.0",
+  "description": "Ticket Scanner App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "dev": "electron . --dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "papaparse": "^5.4.1"
+  },
+  "build": {
+    "appId": "com.ticketscanner.app",
+    "productName": "Ticket Scanner",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "forceCodeSigning": false
+  }
+}

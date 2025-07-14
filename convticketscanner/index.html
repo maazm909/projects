@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket Scanner</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/papaparse@5/papaparse.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <!-- File selection if no file loaded -->
+      <div v-if="!csvPath" class="file-selection">
+        <h2>Ticket Scanner</h2>
+        <button @click="selectCSV" class="file-button">Select CSV File</button>
+        <p class="instruction">Select a CSV file with ticket ranges to begin scanning</p>
+      </div>
+
+      <!-- Scanning interface when file is loaded -->
+      <div v-else class="scanning-interface">
+        <div class="file-info">
+          <p style="margin-right: 10px;"><strong>File:</strong> {{ csvPath.split('/').pop() }}</p>
+          <button @click="selectCSV" class="change-file-btn">Change File</button>
+        </div>
+
+        <!-- Show current input or last scanned barcode -->
+        <div class="scan-display" :class="scanStatus">
+          <div v-if="currentBarcode && !lastScanned">
+            <div class="barcode typing">{{ currentBarcode }}</div>
+            <div class="typing-indicator">Type barcode and press Enter</div>
+            <button @click="processCurrentBarcode" class="process-btn" v-if="currentBarcode.length > 0">
+              Process Barcode
+            </button>
+          </div>
+          <div v-else-if="lastScanned">
+            <div class="barcode">{{ lastScanned }}</div>
+          </div>
+          <div v-else class="waiting">Ready to scan or type barcode...</div>
+        </div>
+
+        <!-- Payment and price selection buttons -->
+        <div v-if="lastScanned && scanStatus === 'valid'" class="selection-area">
+          <div class="section">
+            <h3>Payment Type (P/D)</h3>
+            <div class="button-group">
+              <button 
+                @click="selectedPayment = 'prepaid'" 
+                :class="{ selected: selectedPayment === 'prepaid' }"
+                class="payment-btn">
+                P - Prepaid
+              </button>
+              <button 
+                @click="selectedPayment = 'dayof'" 
+                :class="{ selected: selectedPayment === 'dayof' }"
+                class="payment-btn">
+                D - Day Of
+              </button>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Price</h3>
+            <div class="button-group">
+              <button 
+                @click="selectedPrice = 10" 
+                :class="{ selected: selectedPrice === 10 }"
+                class="price-btn">
+                $10
+              </button>
+              <button 
+                @click="selectedPrice = 15" 
+                :class="{ selected: selectedPrice === 15 }"
+                class="price-btn">
+                $15
+              </button>
+              <button 
+                @click="selectedPrice = 20" 
+                :class="{ selected: selectedPrice === 20 }"
+                class="price-btn">
+                $20
+              </button>
+            </div>
+          </div>
+
+          <div class="save-section">
+            <button @click="saveTicket" class="save-btn">Save Ticket</button>
+            <div class="save-hint">Or press Space</div>
+          </div>
+        </div>
+
+        <div class="status-message">
+          {{ statusMessage }}
+        </div>
+
+        <div class="instructions">
+          <p><strong>Instructions:</strong></p>
+          <ul>
+            <li>Type or scan barcode, then press Enter or click "Process Barcode"</li>
+            <li>Select payment type (P/D keys or click buttons)</li>
+            <li>Select price (click buttons)</li>
+            <li>Click "Save Ticket" button or press Space</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
