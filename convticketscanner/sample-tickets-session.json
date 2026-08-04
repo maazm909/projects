@@ -1,0 +1,42 @@
+{
+  "csvPath": "/home/maaz-mohammad/Documents/Projects/projects/convticketscanner/sample-tickets.csv",
+  "lastModified": "2025-09-13T07:08:00.059Z",
+  "scans": {
+    "100001": {
+      "person": "John Doe",
+      "timestamp": "2025-09-13T07:07:47.964Z",
+      "payment": "prepaid",
+      "price": 125
+    },
+    "100009": {
+      "person": "John Doe",
+      "timestamp": "2025-09-13T07:07:39.173Z",
+      "payment": "dayof",
+      "price": 90
+    },
+    "100025": {
+      "person": "John Doe",
+      "timestamp": "2025-09-13T07:07:39.173Z",
+      "payment": "dayof",
+      "price": 10
+    },
+    "100075": {
+      "person": "Jane Smith",
+      "timestamp": "2025-09-13T07:07:39.173Z",
+      "payment": "dayof",
+      "price": 20
+    },
+    "100076": {
+      "person": "Jane Smith",
+      "timestamp": "2025-09-13T07:07:39.173Z",
+      "payment": "dayof",
+      "price": 10
+    },
+    "102932": {
+      "person": "Unknown Person",
+      "timestamp": "2025-09-13T07:08:00.059Z",
+      "payment": "prepaid",
+      "price": 20
+    }
+  }
+}

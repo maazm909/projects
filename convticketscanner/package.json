@@ -1,5 +1,5 @@
 {
-  "name": "ticket-scanner",
+  "name": "convention-ticket-scanner-25",
   "version": "1.0.0",
   "description": "Ticket Scanner App",
   "main": "main.js",
@@ -20,12 +20,29 @@
   },
   "build": {
     "appId": "com.ticketscanner.app",
-    "productName": "Ticket Scanner",
+    "productName": "Convention Ticket Scanner '25",
     "directories": {
       "output": "dist"
     },
     "win": {
       "target": "nsis"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "category": "public.app-category.business"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        }
+      ]
     },
     "nsis": {
       "oneClick": false,

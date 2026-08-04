@@ -2,7 +2,7 @@ const { ipcRenderer } = require('electron');
 const fs = require('fs');
 const path = require('path');
 
-// CONFIGURATION - Easy to change column names
+// CONFIGURATION - Easy to change column names and valid range
 const CSV_COLUMNS = {
   input: {
     name: 'Full Name',
@@ -19,6 +19,10 @@ const CSV_COLUMNS = {
     count20: '$20 Count'
   }
 };
+
+// Global valid barcode range - adjust these values as needed
+const VALID_RANGE_START = 100000;
+const VALID_RANGE_END = 115000;
 
 const { createApp } = Vue;
 
@@ -37,7 +41,7 @@ createApp({
       scanStatus: '', // 'valid' or 'invalid'
       validatedPerson: '',
       selectedPayment: 'dayof', // 'prepaid' or 'dayof'
-      selectedPrice: 20, // 10, 15, or 20
+      selectedPrice: 25, // 10, 15, or 20
       statusMessage: '',
       isScanning: false
     }
@@ -80,6 +84,13 @@ createApp({
         
         // Handle backspace
         if (e.key === 'Backspace') {
+          // Check if an input field has focus - if so, don't capture for barcode
+          const activeElement = document.activeElement;
+          const isInputFocused = activeElement && 
+            (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA');
+          
+          if (isInputFocused) return;
+          
           barcodeBuffer = barcodeBuffer.slice(0, -1);
           self.currentBarcode = barcodeBuffer;
           
@@ -92,8 +103,24 @@ createApp({
           return;
         }
         
+        // Handle arrow keys - let them work normally in input fields
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+          const activeElement = document.activeElement;
+          const isInputFocused = activeElement && 
+            (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA');
+          
+          if (isInputFocused) return;
+        }
+        
         // Handle number keys (0-9) for barcode input
         if (e.key >= '0' && e.key <= '9') {
+          // Check if an input field has focus - if so, don't capture for barcode
+          const activeElement = document.activeElement;
+          const isInputFocused = activeElement && 
+            (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA');
+          
+          if (isInputFocused) return;
+          
           // Clear previous scan when starting new input
           if (barcodeBuffer.length === 0) {
             self.lastScanned = '';
@@ -120,8 +147,8 @@ createApp({
           self.selectedPayment = 'dayof';
         }
         
-        // Save on Space (when barcode is processed and valid)
-        if (e.key === ' ' && self.lastScanned && self.scanStatus === 'valid') {
+        // Save on Space (when barcode is processed and valid or unknown)
+        if (e.key === ' ' && self.lastScanned && (self.scanStatus === 'valid' || self.scanStatus === 'unknown')) {
           e.preventDefault();
           self.saveTicket();
         }
@@ -138,6 +165,16 @@ createApp({
     
     processBarcode(barcode) {
       this.lastScanned = barcode;
+      
+      // First check if barcode is within valid range
+      if (!this.isWithinValidRange(barcode)) {
+        this.scanStatus = 'invalid';
+        this.validatedPerson = '';
+        this.statusMessage = `Barcode outside valid range (${VALID_RANGE_START}-${VALID_RANGE_END})`;
+        return;
+      }
+      
+      // Then check if it matches a person
       const person = this.validateBarcode(barcode);
       
       if (person) {
@@ -145,14 +182,14 @@ createApp({
         this.validatedPerson = person;
         this.statusMessage = `Valid ticket - Select payment and price, then save`;
       } else {
-        this.scanStatus = 'invalid';
-        this.validatedPerson = '';
-        this.statusMessage = 'Invalid ticket number - not in any assigned range';
+        this.scanStatus = 'unknown';
+        this.validatedPerson = 'Unknown Person';
+        this.statusMessage = 'Unknown ticket number - Select payment and price, then save';
       }
     },
     
     saveTicket() {
-      if (!this.lastScanned || this.scanStatus !== 'valid') return;
+      if (!this.lastScanned || (this.scanStatus !== 'valid' && this.scanStatus !== 'unknown')) return;
       
       const ticketData = {
         person: this.validatedPerson,
@@ -179,6 +216,12 @@ createApp({
       setTimeout(() => this.statusMessage = '', 5000);
     },
     
+    isWithinValidRange(barcode) {
+      const barcodeNum = parseInt(barcode);
+      if (isNaN(barcodeNum)) return false;
+      return barcodeNum >= VALID_RANGE_START && barcodeNum <= VALID_RANGE_END;
+    },
+
     validateBarcode(barcode) {
       const barcodeNum = parseInt(barcode);
       if (isNaN(barcodeNum)) return null;

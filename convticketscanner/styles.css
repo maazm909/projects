@@ -104,6 +104,11 @@ body {
   color: #ef4444;
 }
 
+.scan-display.unknown {
+  background: #fef3c7;
+  color: #d97706;
+}
+
 .barcode {
   font-size: 32px;
   font-family: 'Courier New', monospace;

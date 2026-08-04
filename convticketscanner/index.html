@@ -40,12 +40,12 @@
         </div>
 
         <!-- Payment and price selection buttons -->
-        <div v-if="lastScanned && scanStatus === 'valid'" class="selection-area">
+        <div v-if="lastScanned && (scanStatus === 'valid' || scanStatus === 'unknown')" class="selection-area">
           <div class="section">
             <h3>Payment Type (P/D)</h3>
             <div class="button-group">
               <button 
-                @click="selectedPayment = 'prepaid'" 
+                @click="selectedPayment = 'prepaid'; selectedPrice = 25" 
                 :class="{ selected: selectedPayment === 'prepaid' }"
                 class="payment-btn">
                 P - Prepaid
@@ -63,12 +63,6 @@
             <h3>Price</h3>
             <div class="button-group">
               <button 
-                @click="selectedPrice = 10" 
-                :class="{ selected: selectedPrice === 10 }"
-                class="price-btn">
-                $10
-              </button>
-              <button 
                 @click="selectedPrice = 15" 
                 :class="{ selected: selectedPrice === 15 }"
                 class="price-btn">
@@ -80,6 +74,20 @@
                 class="price-btn">
                 $20
               </button>
+              <button 
+                @click="selectedPrice = 25" 
+                :class="{ selected: selectedPrice === 25 }"
+                class="price-btn">
+                $25
+              </button>
+              <input 
+                type="number" 
+                v-model.number="selectedPrice" 
+                placeholder="Custom price"
+                class="price-input"
+                min="1"
+                step="1"
+              />
             </div>
           </div>
 

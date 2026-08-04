@@ -1,4 +1,7 @@
 Barcode,Payment Type,Price,Associated Person
+100001,Prepaid,$125,John Doe
+100009,Day Of,$90,John Doe
 100025,Day Of,$10,John Doe
 100075,Day Of,$20,Jane Smith
 100076,Day Of,$10,Jane Smith
+102932,Prepaid,$20,Unknown Person
