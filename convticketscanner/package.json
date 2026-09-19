@@ -1,6 +1,6 @@
 {
   "name": "convention-ticket-scanner-26",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Ticket Scanner App",
   "main": "main.js",
   "scripts": {

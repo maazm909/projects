@@ -22,7 +22,7 @@ const CSV_COLUMNS = {
 
 // Global valid barcode range - adjust these values as needed
 const VALID_RANGE_START = 100000;
-const VALID_RANGE_END = 115000;
+const VALID_RANGE_END = 400000;
 
 const { createApp } = Vue;
 
