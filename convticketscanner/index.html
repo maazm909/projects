@@ -19,6 +19,21 @@
 
       <!-- Scanning interface when file is loaded -->
       <div v-else class="scanning-interface">
+        <div class="scan-counter">
+          <span class="scan-counter-number">{{ scannedCount }}</span>
+          <span class="scan-counter-label">{{ scannedCount === 1 ? 'ticket scanned' : 'tickets scanned' }}</span>
+        </div>
+
+        <div v-if="csvWriteError" class="alert alert-error">
+          <strong>Counter is ahead of scanned-tickets.csv.</strong>
+          The last write failed: {{ csvWriteError }}
+          Close the file if it is open elsewhere, then save another ticket to rewrite it.
+        </div>
+
+        <div v-if="loadWarning" class="alert alert-warning">
+          {{ loadWarning }}
+        </div>
+
         <div class="file-info">
           <p style="margin-right: 10px;"><strong>File:</strong> {{ csvPath.split('/').pop() }}</p>
           <button @click="selectCSV" class="change-file-btn">Change File</button>

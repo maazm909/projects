@@ -43,10 +43,18 @@ createApp({
       selectedPayment: 'dayof', // 'prepaid' or 'dayof'
       selectedPrice: 25, // 10, 15, or 20
       statusMessage: '',
+      csvWriteError: '',
+      loadWarning: '',
       isScanning: false
     }
   },
   
+  computed: {
+    scannedCount() {
+      return Object.keys(this.sessionData.scans || {}).length;
+    }
+  },
+
   mounted() {
     this.setupBarcodeListener();
     this.loadLastSession();
@@ -203,14 +211,23 @@ createApp({
       
       // Save session and update CSV
       this.saveSession();
-      this.generateOutputCSV();
+      const written = this.generateOutputCSV();
       
-      this.statusMessage = `Saved: ${this.lastScanned} - ${this.selectedPayment} - $${this.selectedPrice}`;
+      const scanned = this.lastScanned;
       
       // Reset for next scan
       this.lastScanned = '';
       this.scanStatus = '';
       this.validatedPerson = '';
+      
+      if (!written) {
+        // Leave the ticket in the session so the scan is not lost, but say plainly
+        // that the CSV is now behind the counter. No auto-clear - this needs action.
+        this.statusMessage = `${scanned} NOT written to scanned-tickets.csv: ${this.csvWriteError}`;
+        return;
+      }
+      
+      this.statusMessage = `Saved: ${scanned} - ${this.selectedPayment} - $${this.selectedPrice}`;
       
       // Clear status after 5 seconds
       setTimeout(() => this.statusMessage = '', 5000);
@@ -284,11 +301,26 @@ createApp({
             skipEmptyLines: true
           });
           
-          // Convert existing CSV data back to session format
-          parsed.data.forEach(row => {
-            if (row.Barcode) {
+          const skippedRows = [];
+          
+          // Convert existing CSV data back to session format. Each row is handled
+          // independently so one malformed row skips only itself.
+          parsed.data.forEach((row, index) => {
+            const rowNumber = index + 2; // +1 for the header, +1 for 1-based numbering
+            
+            try {
+              if (!row.Barcode) {
+                skippedRows.push(rowNumber);
+                return;
+              }
+              
+              const price = parseInt(String(row.Price || '').replace('$', ''));
+              if (isNaN(price)) {
+                skippedRows.push(rowNumber);
+                return;
+              }
+              
               const paymentType = row['Payment Type'] === 'Prepaid' ? 'prepaid' : 'dayof';
-              const price = parseInt(row.Price.replace('$', ''));
               
               this.sessionData.scans[row.Barcode] = {
                 person: row['Associated Person'],
@@ -296,13 +328,26 @@ createApp({
                 payment: paymentType,
                 price: price
               };
+            } catch (error) {
+              skippedRows.push(rowNumber);
+              console.error(`Error loading scanned ticket on row ${rowNumber}:`, error);
             }
           });
           
           console.log('Loaded existing scanned tickets:', Object.keys(this.sessionData.scans).length);
+          
+          if (skippedRows.length > 0) {
+            this.loadWarning = `${skippedRows.length} row(s) in scanned-tickets.csv could not be read ` +
+              `(row ${skippedRows.join(', ')}) and are not included in the count. ` +
+              `They will be dropped the next time a ticket is saved - fix the file before scanning.`;
+            console.warn(this.loadWarning);
+          } else {
+            this.loadWarning = '';
+          }
         }
       } catch (error) {
         console.error('Error loading existing scanned tickets:', error);
+        this.loadWarning = 'Could not read scanned-tickets.csv: ' + error.message;
       }
     },
     
@@ -376,8 +421,12 @@ createApp({
         
         fs.writeFileSync(outputPath, csvContent);
         console.log('Output CSV updated:', outputPath);
+        this.csvWriteError = '';
+        return true;
       } catch (error) {
         console.error('Error generating output CSV:', error);
+        this.csvWriteError = error.message;
+        return false;
       }
     }
   }
